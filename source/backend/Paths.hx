@@ -176,7 +176,7 @@ class Paths
 		return 'assets/$folder/$file';
 
 	inline public static function getSharedPath(file:String = '')
-		return 'assets/shared/$file';
+		return 'assets/$file';
 
 	inline static public function txt(key:String, ?folder:String)
 		return getPath('data/$key.txt', TEXT, folder, true);
@@ -206,10 +206,10 @@ class Paths
 	}
 
 	inline static public function sound(key:String, ?modsAllowed:Bool = true):Sound
-		return returnSound('sounds/$key', modsAllowed);
+		return returnSound('audio/sounds/$key', modsAllowed);
 
 	inline static public function music(key:String, ?modsAllowed:Bool = true):Sound
-		return returnSound('music/$key', modsAllowed);
+		return returnSound('audio/music/$key', modsAllowed);
 
 	inline static public function inst(song:String, ?modsAllowed:Bool = true):Sound
 		return returnSound('${formatToSongPath(song)}/Inst', 'songs', modsAllowed);
