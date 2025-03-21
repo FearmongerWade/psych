@@ -69,7 +69,6 @@ class SaveVariables
 
 	// -- Misc. -- //
 
-	var checkForUpdates:Bool = false;
 	var comboOffset:Array<Int> = [0, 0, 0, 0];
 	var loadingScreen:Bool = true;
 	var language:String = 'en-US';
@@ -173,7 +172,7 @@ class Settings
 
 		//Placing this in a separate save so that it can be manually deleted without removing your Score and stuff
 		var save:FlxSave = new FlxSave();
-		save.bind('controls_v3', CoolUtil.getSavePath());
+		save.bind('controls_v3', Util.getSavePath());
 		save.data.keyboard = keyBinds;
 		save.data.gamepad = gamepadBinds;
 		save.flush();
@@ -228,7 +227,7 @@ class Settings
 
 		// controls on a separate save file
 		var save:FlxSave = new FlxSave();
-		save.bind('controls_v3', CoolUtil.getSavePath());
+		save.bind('controls_v3', Util.getSavePath());
 		if(save != null)
 		{
 			if(save.data.keyboard != null)

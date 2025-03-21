@@ -125,7 +125,7 @@ class CreditsState extends MusicBeatState
 		descBox.sprTracker = descText;
 		add(descText);
 
-		bg.color = CoolUtil.colorFromString(creditsStuff[curSelected][4]);
+		bg.color = Util.colorFromString(creditsStuff[curSelected][4]);
 		intendedColor = bg.color;
 		changeSelection();
 		super.create();
@@ -175,7 +175,7 @@ class CreditsState extends MusicBeatState
 			}
 
 			if(controls.ACCEPT && (creditsStuff[curSelected][3] == null || creditsStuff[curSelected][3].length > 4)) {
-				CoolUtil.browserLoad(creditsStuff[curSelected][3]);
+				Util.browserLoad(creditsStuff[curSelected][3]);
 			}
 			if (controls.BACK)
 			{
@@ -215,7 +215,7 @@ class CreditsState extends MusicBeatState
 		}
 		while(unselectableCheck(curSelected));
 
-		var newColor:FlxColor = CoolUtil.colorFromString(creditsStuff[curSelected][4]);
+		var newColor:FlxColor = Util.colorFromString(creditsStuff[curSelected][4]);
 		//trace('The BG color is: $newColor');
 		if(newColor != intendedColor)
 		{

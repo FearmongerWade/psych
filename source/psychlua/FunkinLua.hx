@@ -585,7 +585,7 @@ class FunkinLua {
 					var originalTag:String = tag;
 					tag = LuaUtils.formatVariable('tween_$tag');
 					var variables = MusicBeatState.getVariables();
-					variables.set(tag, FlxTween.color(penisExam, duration, curColor, CoolUtil.colorFromString(targetColor), {ease: LuaUtils.getTweenEaseByString(ease),
+					variables.set(tag, FlxTween.color(penisExam, duration, curColor, Util.colorFromString(targetColor), {ease: LuaUtils.getTweenEaseByString(ease),
 						onComplete: function(twn:FlxTween)
 						{
 							variables.remove(tag);
@@ -594,7 +594,7 @@ class FunkinLua {
 					}));
 					return tag;
 				}
-				else FlxTween.color(penisExam, duration, curColor, CoolUtil.colorFromString(targetColor), {ease: LuaUtils.getTweenEaseByString(ease)});
+				else FlxTween.color(penisExam, duration, curColor, Util.colorFromString(targetColor), {ease: LuaUtils.getTweenEaseByString(ease)});
 			}
 			else luaTrace('doTweenColor: Couldnt find object: ' + vars, false, false, FlxColor.RED);
 			return null;
@@ -839,10 +839,10 @@ class FunkinLua {
 		});
 
 		Lua_helper.add_callback(lua, "cameraFlash", function(camera:String, color:String, duration:Float,forced:Bool) {
-			LuaUtils.cameraFromString(camera).flash(CoolUtil.colorFromString(color), duration, null, forced);
+			LuaUtils.cameraFromString(camera).flash(Util.colorFromString(color), duration, null, forced);
 		});
 		Lua_helper.add_callback(lua, "cameraFade", function(camera:String, color:String, duration:Float, forced:Bool, ?fadeOut:Bool = false) {
-			LuaUtils.cameraFromString(camera).fade(CoolUtil.colorFromString(color), duration, fadeOut, null, forced);
+			LuaUtils.cameraFromString(camera).fade(Util.colorFromString(color), duration, fadeOut, null, forced);
 		});
 		Lua_helper.add_callback(lua, "setRatingPercent", function(value:Float) {
 			game.ratingPercent = value;
@@ -959,7 +959,7 @@ class FunkinLua {
 
 		Lua_helper.add_callback(lua, "makeGraphic", function(obj:String, width:Int = 256, height:Int = 256, color:String = 'FFFFFF') {
 			var spr:FlxSprite = LuaUtils.getObjectDirectly(obj);
-			if(spr != null) spr.makeGraphic(width, height, CoolUtil.colorFromString(color));
+			if(spr != null) spr.makeGraphic(width, height, Util.colorFromString(color));
 		});
 		Lua_helper.add_callback(lua, "addAnimationByPrefix", function(obj:String, name:String, prefix:String, framerate:Float = 24, loop:Bool = true) {
 			var obj:FlxSprite = cast LuaUtils.getObjectDirectly(obj);
@@ -1133,18 +1133,18 @@ class FunkinLua {
 			var left_color:Null<FlxColor> = null;
 			var right_color:Null<FlxColor> = null;
 			if (left != null && left != '')
-				left_color = CoolUtil.colorFromString(left);
+				left_color = Util.colorFromString(left);
 			if (right != null && right != '')
-				right_color = CoolUtil.colorFromString(right);
+				right_color = Util.colorFromString(right);
 			game.healthBar.setColors(left_color, right_color);
 		});
 		Lua_helper.add_callback(lua, "setTimeBarColors", function(left:String, right:String) {
 			var left_color:Null<FlxColor> = null;
 			var right_color:Null<FlxColor> = null;
 			if (left != null && left != '')
-				left_color = CoolUtil.colorFromString(left);
+				left_color = Util.colorFromString(left);
 			if (right != null && right != '')
-				right_color = CoolUtil.colorFromString(right);
+				right_color = Util.colorFromString(right);
 			game.timeBar.setColors(left_color, right_color);
 		});
 
@@ -1547,7 +1547,7 @@ class FunkinLua {
 		});
 		//
 
-		Lua_helper.add_callback(lua, "debugPrint", function(text:Dynamic = '', color:String = 'WHITE') PlayState.instance.addTextToDebug(text, CoolUtil.colorFromString(color)));
+		Lua_helper.add_callback(lua, "debugPrint", function(text:Dynamic = '', color:String = 'WHITE') PlayState.instance.addTextToDebug(text, Util.colorFromString(color)));
 
 		addLocalCallback("close", function() {
 			closed = true;

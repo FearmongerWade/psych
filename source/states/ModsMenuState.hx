@@ -110,7 +110,7 @@ class ModsMenuState extends MusicBeatState
 				trace('created missing folder');
 				FileSystem.createDirectory(modFolder);
 			}
-			CoolUtil.openFolder(modFolder);
+			Util.openFolder(modFolder);
 		});
 		add(buttonModFolder);*/
 

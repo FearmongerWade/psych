@@ -115,14 +115,6 @@ class MainMenuState extends MusicBeatState
 		#end
 		#end
 
-		#if CHECK_FOR_UPDATES
-		if (showOutdatedWarning && Settings.data.checkForUpdates && substates.OutdatedSubState.updateVersion != psychEngineVersion) {
-			persistentUpdate = false;
-			showOutdatedWarning = false;
-			openSubState(new substates.OutdatedSubState());
-		}
-		#end
-
 		FlxG.camera.follow(camFollow, null, 0.15);
 	}
 
@@ -320,7 +312,7 @@ class MainMenuState extends MusicBeatState
 								PlayState.stageUI = 'normal';
 							}
 						case 'donate':
-							CoolUtil.browserLoad('https://ninja-muffin24.itch.io/funkin');
+							Util.browserLoad('https://ninja-muffin24.itch.io/funkin');
 							selectedSomethin = false;
 							item.visible = true;
 						default:

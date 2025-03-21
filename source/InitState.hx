@@ -14,7 +14,7 @@ class InitState extends flixel.FlxState
 
         // -- Settings -- // 
 
-        FlxG.save.bind('funkin', CoolUtil.getSavePath());
+        FlxG.save.bind('funkin', Util.getSavePath());
 
         Controls.instance = new Controls();
         Settings.loadDefaultKeys();

@@ -1148,7 +1148,7 @@ class PlayState extends MusicBeatState
 		var missTxt:String = !instakillOnMiss ? '| Misses : $songMisses ' : '';
 		if(totalPlayed != 0)
 		{
-			var percent:Float = CoolUtil.floorDecimal(ratingPercent * 100, 2);
+			var percent:Float = Util.floorDecimal(ratingPercent * 100, 2);
 			str += ' (${percent}%) - ' + ratingFC;
 		}
 

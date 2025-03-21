@@ -3,34 +3,8 @@ package backend;
 import openfl.utils.Assets;
 import lime.utils.Assets as LimeAssets;
 
-class CoolUtil
+class Util
 {
-	public static function checkForUpdates(url:String = null):String {
-		if (url == null || url.length == 0)
-			url = "https://raw.githubusercontent.com/ShadowMario/FNF-PsychEngine/main/gitVersion.txt";
-		var version:String = states.MainMenuState.psychEngineVersion.trim();
-		if(Settings.data.checkForUpdates) {
-			trace('checking for updates...');
-			var http = new haxe.Http(url);
-			http.onData = function (data:String)
-			{
-				var newVersion:String = data.split('\n')[0].trim();
-				trace('version online: $newVersion, your version: $version');
-				if(newVersion != version) {
-					trace('versions arent matching! please update');
-					version = newVersion;
-					http.onData = null;
-					http.onError = null;
-					http = null;
-				}
-			}
-			http.onError = function (error) {
-				trace('error: $error');
-			}
-			http.request();
-		}
-		return version;
-	}
 	inline public static function quantize(f:Float, snap:Float){
 		// changed so this actually works lol
 		var m:Float = Math.fround(f * snap);
@@ -122,7 +96,8 @@ class CoolUtil
 		return dumbArray;
 	}
 
-	inline public static function browserLoad(site:String) {
+	inline public static function browserLoad(site:String) 
+	{
 		#if linux
 		Sys.command('/usr/bin/xdg-open', [site]);
 		#else
@@ -130,7 +105,8 @@ class CoolUtil
 		#end
 	}
 
-	inline public static function openFolder(folder:String, absolute:Bool = false) {
+	inline public static function openFolder(folder:String, absolute:Bool = false) 
+	{
 		#if sys
 			if(!absolute) folder =  Sys.getCwd() + '$folder';
 
@@ -145,7 +121,7 @@ class CoolUtil
 			Sys.command(command, [folder]);
 			trace('$command $folder');
 		#else
-			FlxG.error("Platform is not supported for CoolUtil.openFolder");
+			FlxG.error("Platform is not supported for Util.openFolder");
 		#end
 	}
 
@@ -159,11 +135,10 @@ class CoolUtil
 		@crowplexus
 	**/
 	@:access(flixel.util.FlxSave.validate)
-	inline public static function getSavePath():String {
+	inline public static function getSavePath():String 
+	{
 		final company:String = FlxG.stage.application.meta.get('company');
-		// #if (flixel < "5.0.0") return company; #else
 		return '${company}/${flixel.util.FlxSave.validate(FlxG.stage.application.meta.get('file'))}';
-		// #end
 	}
 
 	public static function setTextBorderFromString(text:FlxText, border:String)

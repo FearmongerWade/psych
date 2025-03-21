@@ -1862,7 +1862,7 @@ class StageEditorMetaSprite
 	public var color(default, set):String = 'FFFFFF';
 	function set_color(v:String)
 	{
-		sprite.color = CoolUtil.colorFromString(v);
+		sprite.color = Util.colorFromString(v);
 		return (color = v);
 	}
 	public var image(default, set):String = 'unknown';

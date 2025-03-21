@@ -194,7 +194,7 @@ class StageData {
 						spr.updateHitbox();
 					}
 					spr.scrollFactor.set(data.scroll[0], data.scroll[1]);
-					spr.color = CoolUtil.colorFromString(data.color);
+					spr.color = Util.colorFromString(data.color);
 					
 					for (varName in ['alpha', 'angle'])
 					{

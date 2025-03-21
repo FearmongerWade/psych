@@ -127,7 +127,7 @@ class NoteSplash extends FlxSprite
 		var offsets:Array<Array<Float>> = [[0, 0]];
 		if (Paths.fileExists('$path.txt', TEXT)) // Backwards compatibility with 0.7 splash txts
 		{
-			var configFile:Array<String> = CoolUtil.listFromString(Paths.getTextFromFile('$path.txt'));
+			var configFile:Array<String> = Util.listFromString(Paths.getTextFromFile('$path.txt'));
 			if (configFile.length > 0)
 			{
 				anim = configFile[0];
