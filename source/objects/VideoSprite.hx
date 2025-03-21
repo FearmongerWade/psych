@@ -6,7 +6,8 @@ import flixel.addons.display.FlxPieDial;
 import hxvlc.flixel.FlxVideoSprite;
 #end
 
-class VideoSprite extends FlxSpriteGroup {
+class VideoSprite extends FlxSpriteGroup 
+{
 	#if VIDEOS_ALLOWED
 	public var finishCallback:Void->Void = null;
 	public var onSkip:Void->Void = null;
@@ -39,31 +40,19 @@ class VideoSprite extends FlxSpriteGroup {
 			add(cover);
 		}
 
-		// initialize sprites
 		videoSprite = new FlxVideoSprite();
 		videoSprite.antialiasing = Settings.data.antialiasing;
 		add(videoSprite);
 		if(canSkip) this.canSkip = true;
-
-		// callbacks
-		if(!shouldLoop) videoSprite.bitmap.onEndReached.add(destroy);
+		if(!shouldLoop) videoSprite.bitmap.onEndReached.add(finishVideo);
 
 		videoSprite.bitmap.onFormatSetup.add(function()
 		{
-			/*
-			#if hxvlc
-			var wd:Int = videoSprite.bitmap.formatWidth;
-			var hg:Int = videoSprite.bitmap.formatHeight;
-			trace('Video Resolution: ${wd}x${hg}');
-			videoSprite.scale.set(FlxG.width / wd, FlxG.height / hg);
-			#end
-			*/
 			videoSprite.setGraphicSize(FlxG.width);
 			videoSprite.updateHitbox();
 			videoSprite.screenCenter();
 		});
 
-		// start video and adjust resolution to screen size
 		videoSprite.load(videoName, shouldLoop ? ['input-repeat=65545'] : null);
 	}
 
@@ -80,8 +69,7 @@ class VideoSprite extends FlxSpriteGroup {
 			cover.destroy();
 		}
 
-		if(finishCallback != null)
-			finishCallback();
+		finishCallback = null;
 		onSkip = null;
 
 		if(FlxG.state != null)
@@ -94,6 +82,15 @@ class VideoSprite extends FlxSpriteGroup {
 		}
 		super.destroy();
 		alreadyDestroyed = true;
+	}
+
+	function finishVideo()
+	{
+		if (!alreadyDestroyed)
+		{
+			if (finishCallback != null) finishCallback();
+			destroy();
+		}
 	}
 
 	override function update(elapsed:Float)
