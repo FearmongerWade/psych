@@ -163,8 +163,8 @@ class HScript extends Iris
 		set('Paths', Paths);
 		set('Conductor', Conductor);
 		set('Settings', Settings);
-		#if ACHIEVEMENTS_ALLOWED
-		set('Achievements', Achievements);
+		#if AWARDS_ALLOWED
+		set('Awards', Awards);
 		#end
 		set('Character', Character);
 		set('Alphabet', Alphabet);

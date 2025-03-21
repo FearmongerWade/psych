@@ -282,7 +282,7 @@ class LoadingState extends MusicBeatState
 		
 					pessy.visible = true;
 					pessy.animation.play('run', true);
-					#if ACHIEVEMENTS_ALLOWED Achievements.unlock('pessy_easter_egg'); #end
+					#if AWARDS_ALLOWED Awards.unlock('pessy_easter_egg'); #end
 					
 					insert(members.indexOf(loadingText), pessy);
 				});

@@ -29,7 +29,7 @@ class MainMenuState extends MusicBeatState
 		'credits'
 	];
 
-	var leftOption:String = #if ACHIEVEMENTS_ALLOWED 'achievements' #else null #end;
+	var leftOption:String = #if AWARDS_ALLOWED 'achievements' #else null #end;
 	var rightOption:String = 'options';
 
 	var magenta:FlxSprite;
@@ -93,15 +93,11 @@ class MainMenuState extends MusicBeatState
 		}
 		changeItem();
 
-		#if ACHIEVEMENTS_ALLOWED
+		#if AWARDS_ALLOWED
 		// Unlocks "Freaky on a Friday Night" achievement if it's a Friday and between 18:00 PM and 23:59 PM
 		var leDate = Date.now();
 		if (leDate.getDay() == 5 && leDate.getHours() >= 18)
-			Achievements.unlock('friday_night_play');
-
-		#if MODS_ALLOWED
-		Achievements.reloadList();
-		#end
+			Awards.unlock('friday_night_play');
 		#end
 
 		FlxG.camera.follow(camFollow, null, 0.15);
@@ -284,9 +280,9 @@ class MainMenuState extends MusicBeatState
 							MusicBeatState.switchState(new ModsMenuState());
 						#end
 
-						#if ACHIEVEMENTS_ALLOWED
+						#if AWARDS_ALLOWED
 						case 'achievements':
-							MusicBeatState.switchState(new AchievementsMenuState());
+							MusicBeatState.switchState(new AwardsState());
 						#end
 
 						case 'credits':

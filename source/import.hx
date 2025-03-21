@@ -10,8 +10,8 @@ import llua.*;
 import llua.Lua;
 #end
 
-#if ACHIEVEMENTS_ALLOWED
-import backend.Achievements;
+#if AWARDS_ALLOWED
+import backend.Awards;
 #end
 
 #if sys

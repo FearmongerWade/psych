@@ -167,7 +167,7 @@ class Settings
 		for (key in Reflect.fields(data))
 			Reflect.setField(FlxG.save.data, key, Reflect.field(data, key));
 
-		#if ACHIEVEMENTS_ALLOWED Achievements.save(); #end
+		#if AWARDS_ALLOWED Awards.save(); #end
 		FlxG.save.flush();
 
 		//Placing this in a separate save so that it can be manually deleted without removing your Score and stuff
@@ -181,7 +181,7 @@ class Settings
 
 	public static function load() 
 	{
-		#if ACHIEVEMENTS_ALLOWED Achievements.load(); #end
+		#if AWARDS_ALLOWED Awards.load(); #end
 
 		for (key in Reflect.fields(data))
 			if (key != 'gameplaySettings' && Reflect.hasField(FlxG.save.data, key))

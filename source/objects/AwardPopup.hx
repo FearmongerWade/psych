@@ -1,12 +1,13 @@
 package objects;
 
-#if ACHIEVEMENTS_ALLOWED
+#if AWARDS_ALLOWED
 import openfl.events.Event;
 import openfl.geom.Matrix;
 import flash.display.BitmapData;
 import openfl.Lib;
 
-class AchievementPopup extends openfl.display.Sprite {
+class AwardPopup extends openfl.display.Sprite 
+{
 	public var onFinish:Void->Void = null;
 	var alphaTween:FlxTween;
 	var lastScale:Float = 1;
@@ -21,14 +22,14 @@ class AchievementPopup extends openfl.display.Sprite {
 		// achievement icon
 		var graphic = null;
 		var hasAntialias:Bool = Settings.data.antialiasing;
-		var image:String = 'achievements/$achieve';
+		var image:String = 'awards/$achieve';
 		
-		var achievement:Achievement = null;
-		if(Achievements.exists(achieve)) achievement = Achievements.get(achieve);
+		var award:Award = null;
+		if(Awards.exists(achieve)) award = Awards.get(achieve);
 
 		#if MODS_ALLOWED
 		var lastMod = Mods.currentModDirectory;
-		if(achievement != null) Mods.currentModDirectory = achievement.mod != null ? achievement.mod : '';
+		if(award != null) Mods.currentModDirectory = award.mod != null ? award.mod : '';
 		#end
 
 		if(Paths.fileExists('images/$image-pixel.png', IMAGE))
@@ -56,10 +57,10 @@ class AchievementPopup extends openfl.display.Sprite {
 		// achievement name/description
 		var name:String = 'Unknown';
 		var desc:String = 'Description not found';
-		if(achievement != null)
+		if(award != null)
 		{
-			if(achievement.name != null) name = achievement.name;
-			if(achievement.description != null)  desc = achievement.description;
+			if(award.name != null) name = award.name;
+			if(award.description != null)  desc = award.description;
 		}
 
 		var textX = sizeX + imgX + 15;
@@ -149,7 +150,7 @@ class AchievementPopup extends openfl.display.Sprite {
 
 	public function destroy()
 	{
-		Achievements._popups.remove(this);
+		Awards._popups.remove(this);
 		//trace('destroyed achievement, new count: ' + Achievements._popups.length);
 
 		if (FlxG.game.contains(this))

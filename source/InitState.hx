@@ -23,8 +23,8 @@ class InitState extends flixel.FlxState
         AlphaCharacter.loadAlphabetData();
         Highscore.load();
 
-        #if ACHIEVEMENTS_ALLOWED 
-        Achievements.load(); 
+        #if AWARDS_ALLOWED 
+        Awards.load(); 
         #end
 
         if (FlxG.save.data.weekCompleted != null)

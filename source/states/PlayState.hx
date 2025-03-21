@@ -2418,9 +2418,9 @@ class PlayState extends MusicBeatState
 		deathCounter = 0;
 		seenCutscene = false;
 
-		#if ACHIEVEMENTS_ALLOWED
+		#if AWARDS_ALLOWED
 		var weekNoMiss:String = WeekData.getWeekFileName() + '_nomiss';
-		checkForAchievement([weekNoMiss, 'ur_bad', 'ur_good', 'hype', 'two_keys', 'toastie' #if BASE_GAME_FILES, 'debugger' #end]);
+		checkForAward([weekNoMiss, 'ur_bad', 'ur_good', 'hype', 'two_keys', 'toastie' #if BASE_GAME_FILES, 'debugger' #end]);
 		#end
 
 		var ret:Dynamic = callOnScripts('onEndSong', null, true);
@@ -2848,8 +2848,8 @@ class PlayState extends MusicBeatState
 			if (!holdArray.contains(true) || endingSong)
 				playerDance();
 
-			#if ACHIEVEMENTS_ALLOWED
-			else checkForAchievement(['oversinging']);
+			#if AWARDS_ALLOWED
+			else checkForAward(['oversinging']);
 			#end
 		}
 
@@ -3513,8 +3513,8 @@ class PlayState extends MusicBeatState
 		updateScore(badHit, scoreBop); // score will only update after rating is calculated, if it's a badHit, it shouldn't bounce
 	}
 
-	#if ACHIEVEMENTS_ALLOWED
-	private function checkForAchievement(achievesToCheck:Array<String> = null)
+	#if AWARDS_ALLOWED
+	private function checkForAward(achievesToCheck:Array<String> = null)
 	{
 		if(chartingMode) return;
 
@@ -3522,7 +3522,7 @@ class PlayState extends MusicBeatState
 		if(cpuControlled) return;
 
 		for (name in achievesToCheck) {
-			if(!Achievements.exists(name)) continue;
+			if(!Awards.exists(name)) continue;
 
 			var unlock:Bool = false;
 			if (name != WeekData.getWeekFileName() + '_nomiss') // common achievements
@@ -3560,7 +3560,7 @@ class PlayState extends MusicBeatState
 					unlock = true;
 			}
 
-			if(unlock) Achievements.unlock(name);
+			if(unlock) Awards.unlock(name);
 		}
 	}
 	#end

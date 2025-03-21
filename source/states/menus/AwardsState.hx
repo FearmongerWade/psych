@@ -4,8 +4,8 @@ import flixel.FlxObject;
 import flixel.util.FlxSort;
 import objects.Bar;
 
-#if ACHIEVEMENTS_ALLOWED
-class AchievementsMenuState extends MusicBeatState
+#if AWARDS_ALLOWED
+class AwardsState extends MusicBeatState
 {
 	public var curSelected:Int = 0;
 
@@ -26,15 +26,14 @@ class AchievementsMenuState extends MusicBeatState
 		Paths.clearUnusedMemory();
 
 		#if DISCORD_ALLOWED
-		DiscordClient.changePresence("Achievements Menu", null);
+		DiscordClient.changePresence("Awards Menu", null);
 		#end
 
-		// prepare achievement list
-		for (achievement => data in Achievements.achievements)
+		for (award => data in Awards.awards)
 		{
-			var unlocked:Bool = Achievements.isUnlocked(achievement);
+			var unlocked:Bool = Awards.isUnlocked(award);
 			if(data.hidden != true || unlocked)
-				options.push(makeAchievement(achievement, data, unlocked, data.mod));
+				options.push(makeAward(award, data, unlocked, data.mod));
 		}
 
 		camFollow = new FlxObject(0, 0, 1, 1);
@@ -59,7 +58,7 @@ class AchievementsMenuState extends MusicBeatState
 			if(option.unlocked)
 			{
 				#if MODS_ALLOWED Mods.currentModDirectory = option.mod; #end
-				var image:String = 'achievements/' + option.name;
+				var image:String = 'awards/' + option.name;
 				if(Paths.fileExists('images/$image-pixel.png', IMAGE))
 				{
 					graphic = Paths.image('$image-pixel');
@@ -69,7 +68,7 @@ class AchievementsMenuState extends MusicBeatState
 
 				if(graphic == null) graphic = Paths.image('unknownMod');
 			}
-			else graphic = Paths.image('achievements/lockedachievement');
+			else graphic = Paths.image('awards/locked');
 
 			var spr:FlxSprite = new FlxSprite(0, Math.floor(grpOptions.members.length / MAX_PER_ROW) * 180).loadGraphic(graphic);
 			spr.scrollFactor.x = 0;
@@ -127,13 +126,13 @@ class AchievementsMenuState extends MusicBeatState
 		FlxG.camera.scroll.y = -FlxG.height;
 	}
 
-	function makeAchievement(achievement:String, data:Achievement, unlocked:Bool, mod:String = null)
+	function makeAward(achievement:String, data:Award, unlocked:Bool, mod:String = null)
 	{
 		return {
 			name: achievement,
 			displayName: unlocked ? data.name : '???',
 			description: data.description,
-			curProgress: data.maxScore > 0 ? Achievements.getScore(achievement) : 0,
+			curProgress: data.maxScore > 0 ? Awards.getScore(achievement) : 0,
 			maxProgress: data.maxScore > 0 ? data.maxScore : 0,
 			decProgress: data.maxScore > 0 ? data.maxDecimals : 0,
 			unlocked: unlocked,
@@ -199,7 +198,7 @@ class AchievementsMenuState extends MusicBeatState
 			
 			if(controls.RESET && (options[curSelected].unlocked || options[curSelected].curProgress > 0))
 			{
-				openSubState(new ResetAchievementSubstate());
+				openSubState(new ResetAwardSubstate());
 			}
 		}
 
@@ -250,7 +249,7 @@ class AchievementsMenuState extends MusicBeatState
 	}
 }
 
-class ResetAchievementSubstate extends MusicBeatSubstate
+class ResetAwardSubstate extends MusicBeatSubstate
 {
 	var onYes:Bool = false;
 	var yesText:Alphabet;
@@ -266,12 +265,12 @@ class ResetAchievementSubstate extends MusicBeatSubstate
 		add(bg);
 		FlxTween.tween(bg, {alpha: 0.6}, 0.4, {ease: FlxEase.quartInOut});
 
-		var text:Alphabet = new Alphabet(0, 180, 'Reset Achievement:', true);
+		var text:Alphabet = new Alphabet(0, 180, 'Reset Award:', true);
 		text.screenCenter(X);
 		text.scrollFactor.set();
 		add(text);
 		
-		var state:AchievementsMenuState = cast FlxG.state;
+		var state:AwardsState = cast FlxG.state;
 		var text:FlxText = new FlxText(50, text.y + 90, FlxG.width - 100, state.options[state.curSelected].displayName, 40);
 		text.setFormat(Paths.font("vcr.ttf"), 40, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		text.scrollFactor.set();
@@ -312,16 +311,16 @@ class ResetAchievementSubstate extends MusicBeatSubstate
 		{
 			if(onYes)
 			{
-				var state:AchievementsMenuState = cast FlxG.state;
+				var state:AwardsState = cast FlxG.state;
 				var option:Dynamic = state.options[state.curSelected];
 
-				Achievements.variables.remove(option.name);
-				Achievements.achievementsUnlocked.remove(option.name);
+				Awards.variables.remove(option.name);
+				Awards.awardsUnlocked.remove(option.name);
 				option.unlocked = false;
 				option.curProgress = 0;
 				option.name = state.nameText.text = '???';
 				if(option.maxProgress > 0) state.progressTxt.text = '0 / ' + option.maxProgress;
-				state.grpOptions.members[state.curSelected].loadGraphic(Paths.image('achievements/lockedachievement'));
+				state.grpOptions.members[state.curSelected].loadGraphic(Paths.image('awards/locked'));
 				state.grpOptions.members[state.curSelected].antialiasing = Settings.data.antialiasing;
 
 				if(state.progressBar.visible)
@@ -332,7 +331,7 @@ class ResetAchievementSubstate extends MusicBeatSubstate
 						onUpdate: function(twn:FlxTween) state.progressBar.updateBar()
 					});
 				}
-				Achievements.save();
+				Awards.save();
 				FlxG.save.flush();
 
 				FlxG.sound.play(Paths.sound('cancelMenu'));
