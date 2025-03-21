@@ -1,9 +1,7 @@
-package states;
+package states.menus;
 
 import flixel.FlxSubState;
-
 import flixel.effects.FlxFlicker;
-import lime.app.Application;
 
 class FlashingState extends MusicBeatState
 {

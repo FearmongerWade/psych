@@ -1,4 +1,4 @@
-package states;
+package states.menus;
 
 import flixel.FlxObject;
 import flixel.util.FlxSort;

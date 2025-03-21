@@ -1,4 +1,4 @@
-package states;
+package states.menus;
 
 import backend.WeekData;
 
@@ -14,9 +14,6 @@ import openfl.display.Bitmap;
 import openfl.display.BitmapData;
 
 import shaders.ColorSwap;
-
-import states.StoryMenuState;
-import states.MainMenuState;
 
 typedef TitleData =
 {

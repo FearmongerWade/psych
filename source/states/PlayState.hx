@@ -21,8 +21,8 @@ import haxe.Json;
 
 import cutscenes.DialogueBoxPsych;
 
-import states.StoryMenuState;
-import states.FreeplayState;
+import states.menus.StoryMenuState;
+import states.menus.FreeplayState;
 import states.editors.ChartingState;
 import states.editors.CharacterEditorState;
 

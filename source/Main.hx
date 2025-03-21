@@ -23,18 +23,20 @@ import haxe.io.Path;
 @:cppInclude('./external/gamemode_client.h')
 @:cppFileCode('#define GAMEMODE_AUTO')
 #end
+
 class Main extends Sprite
 {
 	private static var game = {
 		width: 1280,
 		height: 720,
-		initialState: states.TitleState, 
+		initialState: states.menus.TitleState, 
 		framerate: 60, 
 		skipSplash: true, 
 		startFullscreen: false 
 	};
 
 	public static var fpsVar:FPSCounter;
+	public static var psychVersion:String = '1.0.3';
 
 	public static var muteKeys:Array<FlxKey> = [FlxKey.NUMPADZERO, FlxKey.ZERO];
 	public static var volumeDownKeys:Array<FlxKey> = [FlxKey.NUMPADMINUS, FlxKey.MINUS];

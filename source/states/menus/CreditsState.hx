@@ -1,4 +1,4 @@
-package states;
+package states.menus;
 
 import objects.AttachedSprite;
 
@@ -274,7 +274,6 @@ class CreditsState extends MusicBeatState
 	}
 	#end
 
-	private function unselectableCheck(num:Int):Bool {
+	private function unselectableCheck(num:Int):Bool
 		return creditsStuff[num].length <= 1;
-	}
 }

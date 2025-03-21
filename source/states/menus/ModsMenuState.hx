@@ -1,4 +1,4 @@
-package states;
+package states.menus;
 
 import backend.WeekData;
 import backend.Mods;

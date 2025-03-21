@@ -1,8 +1,7 @@
-package states;
+package states.menus;
 
 import flixel.FlxObject;
 import flixel.effects.FlxFlicker;
-import lime.app.Application;
 import states.editors.MasterEditorMenu;
 import options.OptionsState;
 
@@ -14,7 +13,6 @@ enum MainMenuColumn {
 
 class MainMenuState extends MusicBeatState
 {
-	public static var psychEngineVersion:String = '1.0.3'; // This is also used for Discord RPC
 	public static var curSelected:Int = 0;
 	public static var curColumn:MainMenuColumn = CENTER;
 	var allowMouse:Bool = true; //Turn this off to block mouse movement in menus
@@ -93,15 +91,6 @@ class MainMenuState extends MusicBeatState
 			rightItem = createMenuItem(rightOption, FlxG.width - 60, 490);
 			rightItem.x -= rightItem.width;
 		}
-
-		var psychVer:FlxText = new FlxText(12, FlxG.height - 44, 0, "Psych Engine v" + psychEngineVersion, 12);
-		psychVer.scrollFactor.set();
-		psychVer.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(psychVer);
-		var fnfVer:FlxText = new FlxText(12, FlxG.height - 24, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
-		fnfVer.scrollFactor.set();
-		fnfVer.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(fnfVer);
 		changeItem();
 
 		#if ACHIEVEMENTS_ALLOWED
