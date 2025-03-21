@@ -14,10 +14,10 @@
 	"camera_speed": 1,
 
 	"preload": {
-		"images/stageback": 3,
-		"images/stagefront": 3,
-		"images/stagecurtains": 2,
-		"images/stage_light": 2
+		"images/backgrounds/stage/stageback": 3,
+		"images/backgrounds/stage/stagefront": 3,
+		"images/backgrounds/stage/stagecurtains": 2,
+		"images/backgrounds/stage/stage_light": 2
 	},
 
 	"_editorMeta": {

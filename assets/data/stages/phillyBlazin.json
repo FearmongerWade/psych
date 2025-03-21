@@ -1,5 +1,5 @@
 {
-	"directory": "weekend1",
+	"directory": "",
 	"defaultZoom": 0.75,
 	"stageUI": "",
 
@@ -14,13 +14,13 @@
 	"camera_speed": 1,
 
 	"preload": {
-		"images/abot/": 3,
-		"images/abot/systemEyes/": 3,
-		"images/abot/abotSystem/": 3,
+		"images/backgrounds/weekend/abot/": 3,
+		"images/backgrounds/weekend/abot/systemEyes/": 3,
+		"images/backgrounds/weekend/abot/abotSystem/": 3,
 
-		"images/phillyBlazin/streetBlur": 3,
-		"images/phillyBlazin/skyBlur": 2,
-		"images/phillyBlazin/lightning": 2,
+		"images/backgrounds/weekend/phillyBlazin/streetBlur": 3,
+		"images/backgrounds/weekend/phillyBlazin/skyBlur": 2,
+		"images/backgrounds/weekend/phillyBlazin/lightning": 2,
 
 		"sounds/lightning/": 3
 	},

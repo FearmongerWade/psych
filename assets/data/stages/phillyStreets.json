@@ -1,5 +1,5 @@
 {
-	"directory": "weekend1",
+	"directory": "",
 	"defaultZoom": 0.77,
 	"stageUI": "",
 
@@ -14,23 +14,23 @@
 	"camera_speed": 1,
 
 	"preload": {
-		"images/abot/": 3,
-		"images/abot/systemEyes/": 3,
-		"images/abot/abotSystem/": 3,
+		"images/backgrounds/weekend/abot/": 3,
+		"images/backgrounds/weekend/abot/systemEyes/": 3,
+		"images/backgrounds/weekend/abot/abotSystem/": 3,
 
-		"images/SpraycanPile": 3,
-		"images/phillyStreets/phillyConstruction": 3,
-		"images/phillyStreets/phillyHighwayLights": 3,
-		"images/phillyStreets/phillyHighway": 3,
-		"images/phillyStreets/phillyForeground": 3,
-		"images/phillyStreets/phillySkybox": 2,
-		"images/phillyStreets/phillySkyline": 2,
-		"images/phillyStreets/phillyHighwayLights_lightmap": 2,
-		"images/phillyStreets/phillySmog": 2,
-		"images/phillyStreets/phillyCars": 2,
-		"images/phillyStreets/phillyTraffic": 2,
-		"images/phillyStreets/phillyTraffic_lightmap": 2,
-		"images/phillyStreets/phillyForegroundCity": 2
+		"images/backgrounds/weekend/SpraycanPile": 3,
+		"images/backgrounds/weekend/phillyStreets/phillyConstruction": 3,
+		"images/backgrounds/weekend/phillyStreets/phillyHighwayLights": 3,
+		"images/backgrounds/weekend/phillyStreets/phillyHighway": 3,
+		"images/backgrounds/weekend/phillyStreets/phillyForeground": 3,
+		"images/backgrounds/weekend/phillyStreets/phillySkybox": 2,
+		"images/backgrounds/weekend/phillyStreets/phillySkyline": 2,
+		"images/backgrounds/weekend/phillyStreets/phillyHighwayLights_lightmap": 2,
+		"images/backgrounds/weekend/phillyStreets/phillySmog": 2,
+		"images/backgrounds/weekend/phillyStreets/phillyCars": 2,
+		"images/backgrounds/weekend/phillyStreets/phillyTraffic": 2,
+		"images/backgrounds/weekend/phillyStreets/phillyTraffic_lightmap": 2,
+		"images/backgrounds/weekend/phillyStreets/phillyForegroundCity": 2
 	},
 
 	"_editorMeta": {

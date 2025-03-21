@@ -1,5 +1,5 @@
 {
-	"directory": "week2",
+	"directory": "",
 	"defaultZoom": 1.05,
 	"stageUI": "",
 
@@ -14,8 +14,8 @@
 	"camera_speed": 1,
 
 	"preload": {
-		"images/halloween_bg": 2,
-		"images/halloween_bg_low": 1
+		"images/backgrounds/spooky/halloween_bg": 2,
+		"images/backgrounds/spooky/halloween_bg_low": 1
 	},
 
 	"_editorMeta": {

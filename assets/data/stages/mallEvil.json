@@ -1,5 +1,5 @@
 {
-	"directory": "week5",
+	"directory": "",
 	"defaultZoom": 1.05,
 	"stageUI": "",
 
@@ -14,9 +14,9 @@
 	"camera_speed": 1,
 
 	"preload": {
-		"images/christmas/evilBG": 3,
-		"images/christmas/evilSnow": 3,
-		"images/christmas/evilTree": 3
+		"images/backgrounds/christmas/evilBG": 3,
+		"images/backgrounds/christmas/evilSnow": 3,
+		"images/backgrounds/christmas/evilTree": 3
 	},
 
 	"_editorMeta": {

@@ -1,5 +1,5 @@
 {
-	"directory": "week5",
+	"directory": "",
 	"defaultZoom": 0.8,
 	"stageUI": "",
 
@@ -14,13 +14,13 @@
 	"camera_speed": 1,
 
 	"preload": {
-		"images/christmas/bgWalls": 3,
-		"images/christmas/bottomBop": 3,
-		"images/christmas/christmasTree": 3,
-		"images/christmas/fgSnow": 3,
-		"images/christmas/santa": 3,
-		"images/christmas/upperBop": 2,
-		"images/christmas/bgEscalator": 2
+		"images/backgrounds/christmas/bgWalls": 3,
+		"images/backgrounds/christmas/bottomBop": 3,
+		"images/backgrounds/christmas/christmasTree": 3,
+		"images/backgrounds/christmas/fgSnow": 3,
+		"images/backgrounds/christmas/santa": 3,
+		"images/backgrounds/christmas/upperBop": 2,
+		"images/backgrounds/christmas/bgEscalator": 2
 	},
 
 	"_editorMeta": {

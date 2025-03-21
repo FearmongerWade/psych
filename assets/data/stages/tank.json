@@ -8,22 +8,22 @@
 	"opponent": [20, 100],
 
 	"preload": {
-		"images/tank0": 3,
-		"images/tank1": 2,
-		"images/tank2": 3,
-		"images/tank3": 2,
-		"images/tank4": 2,
-		"images/tank5": 3,
-		"images/tankClouds": 2,
-		"images/tankMountains": 2,
-		"images/tankBuildings": 2,
-		"images/smokeLeft": 2,
-		"images/smokeRight": 2,
-		"images/tankWatchtower": 2,
-		"images/tankGround": 3,
-		"images/tankRolling": 3,
-		"images/tankRuins": 3,
-		"images/tankSky": 3
+		"images/backgrounds/tank/tank0": 3,
+		"images/backgrounds/tank/tank1": 2,
+		"images/backgrounds/tank/tank2": 3,
+		"images/backgrounds/tank/tank3": 2,
+		"images/backgrounds/tank/tank4": 2,
+		"images/backgrounds/tank/tank5": 3,
+		"images/backgrounds/tank/tankClouds": 2,
+		"images/backgrounds/tank/tankMountains": 2,
+		"images/backgrounds/tank/tankBuildings": 2,
+		"images/backgrounds/tank/smokeLeft": 2,
+		"images/backgrounds/tank/smokeRight": 2,
+		"images/backgrounds/tank/tankWatchtower": 2,
+		"images/backgrounds/tank/tankGround": 3,
+		"images/backgrounds/tank/tankRolling": 3,
+		"images/backgrounds/tank/tankRuins": 3,
+		"images/backgrounds/tank/tankSky": 3
 	},
 
 	"_editorMeta": {
