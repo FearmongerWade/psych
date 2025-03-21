@@ -188,7 +188,5 @@
 	<assets path='meta/icons/iconOG.png' rename='icon.png' if="linux || mac" />
 	
 	<icon path="meta/icons/icon16.png" size='16'/>
-	<icon path="meta/icons/icon32.png" size='32'/>
-	<icon path="meta/icons/icon64.png" size='64'/>
 	<icon path="meta/icons/iconOG.png" />
 </project>

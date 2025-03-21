@@ -373,8 +373,7 @@ class GameplayOption
 
 	public function new(name:String, variable:String, type:OptionType, defaultValue:Dynamic = 'null variable value', ?options:Array<String> = null)
 	{
-		_name = name;
-		this.name = Language.getPhrase('setting_$name', name);
+		this.name = name;
 		this.variable = variable;
 		this.type = type;
 		this.defaultValue = defaultValue;
@@ -444,12 +443,7 @@ class GameplayOption
 
 	private function set_text(newValue:String = '')
 	{
-		if(child != null)
-		{
-			_text = newValue;
-			child.text = Language.getPhrase('setting_$_name-$_text', _text);
-			return _text;
-		}
+		if(child != null) child.text = newValue;
 		return null;
 	}
 }
