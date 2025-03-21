@@ -526,10 +526,10 @@ class LoadingState extends MusicBeatState
 						{
 							if(asset.startsWith('images/'))
 								imgs.push(asset.substr('images/'.length));
-							else if(asset.startsWith('sounds/'))
-								snds.push(asset.substr('sounds/'.length));
-							else if(asset.startsWith('music/'))
-								mscs.push(asset.substr('music/'.length));
+							else if(asset.startsWith('audio/sounds/'))
+								snds.push(asset.substr('audio/sounds/'.length));
+							else if(asset.startsWith('audio/music/'))
+								mscs.push(asset.substr('audio/music/'.length));
 						}
 					}
 				}
@@ -600,8 +600,8 @@ class LoadingState extends MusicBeatState
 	public static function clearInvalids()
 	{
 		clearInvalidFrom(imagesToPrepare, 'images', '.png', IMAGE);
-		clearInvalidFrom(soundsToPrepare, 'sounds', '.${Paths.SOUND_EXT}', SOUND);
-		clearInvalidFrom(musicToPrepare, 'music',' .${Paths.SOUND_EXT}', SOUND);
+		clearInvalidFrom(soundsToPrepare, 'audio/sounds', '.${Paths.SOUND_EXT}', SOUND);
+		clearInvalidFrom(musicToPrepare, 'audio/music',' .${Paths.SOUND_EXT}', SOUND);
 		clearInvalidFrom(songsToPrepare, 'songs', '.${Paths.SOUND_EXT}', SOUND, 'songs');
 
 		for (arr in [imagesToPrepare, soundsToPrepare, musicToPrepare, songsToPrepare])
@@ -664,8 +664,8 @@ class LoadingState extends MusicBeatState
 	static function _threadFunc()
 	{
 		_startPool();
-		for (sound in soundsToPrepare) initThread(() -> preloadSound('sounds/$sound'), 'sound $sound');
-		for (music in musicToPrepare) initThread(() -> preloadSound('music/$music'), 'music $music');
+		for (sound in soundsToPrepare) initThread(() -> preloadSound('audio/sounds/$sound'), 'sound $sound');
+		for (music in musicToPrepare) initThread(() -> preloadSound('audio/music/$music'), 'music $music');
 		for (song in songsToPrepare) initThread(() -> preloadSound(song, 'songs', true, false), 'song $song');
 
 		// for images, they get to have their own thread

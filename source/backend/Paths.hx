@@ -185,7 +185,7 @@ class Paths
 		return getPath('data/$key.xml', TEXT, folder, true);
 
 	inline static public function json(key:String, ?folder:String)
-		return getPath('data/$key.json', TEXT, folder, true);
+		return getPath('songs/$key.json', TEXT, folder, true);
 
 	inline static public function shaderFragment(key:String, ?folder:String)
 		return getPath('shaders/$key.frag', TEXT, folder, true);
