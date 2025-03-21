@@ -160,7 +160,7 @@ class Controls
 	public static var instance:Controls;
 	public function new()
 	{
-		keyboardBinds = ClientPrefs.keyBinds;
-		gamepadBinds = ClientPrefs.gamepadBinds;
+		keyboardBinds = Settings.keyBinds;
+		gamepadBinds = Settings.gamepadBinds;
 	}
 }

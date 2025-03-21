@@ -46,11 +46,11 @@ class WeekEditorState extends MusicBeatState implements PsychUIEventHandler.Psyc
 		var ui_tex = Paths.getSparrowAtlas('campaign_menu_UI_assets');
 		var bgYellow:FlxSprite = new FlxSprite(0, 56).makeGraphic(FlxG.width, 386, 0xFFF9CF51);
 		bgSprite = new FlxSprite(0, 56);
-		bgSprite.antialiasing = ClientPrefs.data.antialiasing;
+		bgSprite.antialiasing = Settings.data.antialiasing;
 
 		weekThing = new MenuItem(0, bgSprite.y + 396, weekFileName);
 		weekThing.y += weekThing.height + 20;
-		weekThing.antialiasing = ClientPrefs.data.antialiasing;
+		weekThing.antialiasing = Settings.data.antialiasing;
 		add(weekThing);
 
 		var blackBarThingie:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, 56, FlxColor.BLACK);
@@ -62,7 +62,7 @@ class WeekEditorState extends MusicBeatState implements PsychUIEventHandler.Psyc
 		lock.frames = ui_tex;
 		lock.animation.addByPrefix('lock', 'lock');
 		lock.animation.play('lock');
-		lock.antialiasing = ClientPrefs.data.antialiasing;
+		lock.antialiasing = Settings.data.antialiasing;
 		add(lock);
 		
 		missingFileText = new FlxText(0, 0, FlxG.width, "");
@@ -84,7 +84,7 @@ class WeekEditorState extends MusicBeatState implements PsychUIEventHandler.Psyc
 		add(grpWeekCharacters);
 
 		var tracksSprite:FlxSprite = new FlxSprite(FlxG.width * 0.07, bgSprite.y + 435).loadGraphic(Paths.image('Menu_Tracks'));
-		tracksSprite.antialiasing = ClientPrefs.data.antialiasing;
+		tracksSprite.antialiasing = Settings.data.antialiasing;
 		add(tracksSprite);
 
 		txtTracklist = new FlxText(FlxG.width * 0.05, tracksSprite.y + 60, 0, "", 32);
@@ -397,7 +397,7 @@ class WeekEditorState extends MusicBeatState implements PsychUIEventHandler.Psyc
 
 		if(PsychUIInputText.focusOn == null)
 		{
-			ClientPrefs.toggleVolumeKeys(true);
+			Settings.toggleVolumeKeys(true);
 			if(FlxG.keys.justPressed.ESCAPE)
 			{
 				if(!unsavedProgress)
@@ -408,7 +408,7 @@ class WeekEditorState extends MusicBeatState implements PsychUIEventHandler.Psyc
 				else openSubState(new ExitConfirmationPrompt(function() unsavedProgress = false));
 			}
 		}
-		else ClientPrefs.toggleVolumeKeys(false);
+		else Settings.toggleVolumeKeys(false);
 
 		super.update(elapsed);
 
@@ -558,7 +558,7 @@ class WeekEditorFreeplayState extends MusicBeatState implements PsychUIEventHand
 
 	override function create() {
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-		bg.antialiasing = ClientPrefs.data.antialiasing;
+		bg.antialiasing = Settings.data.antialiasing;
 		bg.color = FlxColor.WHITE;
 		add(bg);
 
@@ -751,10 +751,10 @@ class WeekEditorFreeplayState extends MusicBeatState implements PsychUIEventHand
 		}
 		
 		if(PsychUIInputText.focusOn != null)
-			ClientPrefs.toggleVolumeKeys(false);
+			Settings.toggleVolumeKeys(false);
 		else
 		{
-			ClientPrefs.toggleVolumeKeys(true);
+			Settings.toggleVolumeKeys(true);
 			if(FlxG.keys.justPressed.ESCAPE) {
 				if(!WeekEditorState.unsavedProgress)
 				{

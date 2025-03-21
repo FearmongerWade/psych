@@ -84,18 +84,18 @@ class EditorPlayState extends MusicBeatSubstate
 
 	override function create()
 	{
-		Conductor.safeZoneOffset = (ClientPrefs.data.safeFrames / 60) * 1000 * playbackRate;
+		Conductor.safeZoneOffset = (Settings.data.safeFrames / 60) * 1000 * playbackRate;
 		Conductor.songPosition -= startOffset;
 		startOffset = Conductor.crochet;
 		timerToStart = startOffset;
 
 		cachePopUpScore();
-		guitarHeroSustains = ClientPrefs.data.guitarHeroSustains;
-		if(ClientPrefs.data.hitsoundVolume > 0) Paths.sound('hitsound');
+		guitarHeroSustains = Settings.data.guitarHeroSustains;
+		if(Settings.data.hitsoundVolume > 0) Paths.sound('hitsound');
 
 		/* setting up Editor PlayState stuff */
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-		bg.antialiasing = ClientPrefs.data.antialiasing;
+		bg.antialiasing = Settings.data.antialiasing;
 		bg.scrollFactor.set();
 		bg.color = 0xFF101010;
 		bg.alpha = 0.9;
@@ -124,7 +124,7 @@ class EditorPlayState extends MusicBeatSubstate
 		scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 		scoreTxt.borderSize = 1.25;
-		scoreTxt.visible = !ClientPrefs.data.hideHud;
+		scoreTxt.visible = !Settings.data.hideHud;
 		add(scoreTxt);
 		
 		dataTxt = new FlxText(10, 580, FlxG.width - 20, "Section: 0", 20);
@@ -231,7 +231,7 @@ class EditorPlayState extends MusicBeatSubstate
 			});
 		}
 		
-		var time:Float = CoolUtil.floorDecimal((Conductor.songPosition - ClientPrefs.data.noteOffset) / 1000, 1);
+		var time:Float = CoolUtil.floorDecimal((Conductor.songPosition - Settings.data.noteOffset) / 1000, 1);
 		var songLen:Float = CoolUtil.floorDecimal(songLength / 1000, 1);
 		dataTxt.text = 'Time: $time / $songLen' +
 						'\n\nSection: $curSection' +
@@ -247,7 +247,7 @@ class EditorPlayState extends MusicBeatSubstate
 			//trace('BEAT HIT: ' + curBeat + ', LAST HIT: ' + lastBeatHit);
 			return;
 		}
-		notes.sort(FlxSort.byY, ClientPrefs.data.downScroll ? FlxSort.ASCENDING : FlxSort.DESCENDING);
+		notes.sort(FlxSort.byY, Settings.data.downScroll ? FlxSort.ASCENDING : FlxSort.DESCENDING);
 
 		super.beatHit();
 		lastBeatHit = curBeat;
@@ -298,13 +298,13 @@ class EditorPlayState extends MusicBeatSubstate
 	{
 		// FlxG.log.add(ChartParser.parse());
 		songSpeed = PlayState.SONG.speed;
-		var songSpeedType:String = ClientPrefs.getGameplaySetting('scrolltype');
+		var songSpeedType:String = Settings.getGameplaySetting('scrolltype');
 		switch(songSpeedType)
 		{
 			case "multiplicative":
-				songSpeed = PlayState.SONG.speed * ClientPrefs.getGameplaySetting('scrollspeed');
+				songSpeed = PlayState.SONG.speed * Settings.getGameplaySetting('scrollspeed');
 			case "constant":
-				songSpeed = ClientPrefs.getGameplaySetting('scrollspeed');
+				songSpeed = Settings.getGameplaySetting('scrollspeed');
 		}
 		noteKillOffset = Math.max(Conductor.stepCrochet, 350 / songSpeed * playbackRate);
 
@@ -404,7 +404,7 @@ class EditorPlayState extends MusicBeatSubstate
 							oldNote.resizeByRatio(curStepCrochet / Conductor.stepCrochet);
 						}
 
-						if(ClientPrefs.data.downScroll)
+						if(Settings.data.downScroll)
 							sustainNote.correctionOffset = 0;
 					}
 					else if(oldNote.isSustainNote)
@@ -414,7 +414,7 @@ class EditorPlayState extends MusicBeatSubstate
 					}
 
 					if (sustainNote.mustPress) sustainNote.x += FlxG.width / 2; // general offset
-					else if(ClientPrefs.data.middleScroll)
+					else if(Settings.data.middleScroll)
 					{
 						sustainNote.x += 310;
 						if(sustainNote.noteData > 1) //Up and Right
@@ -427,7 +427,7 @@ class EditorPlayState extends MusicBeatSubstate
 			{
 				swagNote.x += FlxG.width / 2; // general offset
 			}
-			else if(ClientPrefs.data.middleScroll)
+			else if(Settings.data.middleScroll)
 			{
 				swagNote.x += 310;
 				if(swagNote.noteData > 1) //Up and Right
@@ -442,27 +442,27 @@ class EditorPlayState extends MusicBeatSubstate
 	
 	private function generateStaticArrows(player:Int):Void
 	{
-		var strumLineX:Float = ClientPrefs.data.middleScroll ? PlayState.STRUM_X_MIDDLESCROLL : PlayState.STRUM_X;
-		var strumLineY:Float = ClientPrefs.data.downScroll ? (FlxG.height - 150) : 50;
+		var strumLineX:Float = Settings.data.middleScroll ? PlayState.STRUM_X_MIDDLESCROLL : PlayState.STRUM_X;
+		var strumLineY:Float = Settings.data.downScroll ? (FlxG.height - 150) : 50;
 		for (i in 0...4)
 		{
 			// FlxG.log.add(i);
 			var targetAlpha:Float = 1;
 			if (player < 1)
 			{
-				if(!ClientPrefs.data.opponentStrums) targetAlpha = 0;
-				else if(ClientPrefs.data.middleScroll) targetAlpha = 0.35;
+				if(!Settings.data.opponentStrums) targetAlpha = 0;
+				else if(Settings.data.middleScroll) targetAlpha = 0.35;
 			}
 
 			var babyArrow:StrumNote = new StrumNote(strumLineX, strumLineY, i, player);
-			babyArrow.downScroll = ClientPrefs.data.downScroll;
+			babyArrow.downScroll = Settings.data.downScroll;
 			babyArrow.alpha = targetAlpha;
 
 			if (player == 1)
 				playerStrums.add(babyArrow);
 			else
 			{
-				if(ClientPrefs.data.middleScroll)
+				if(Settings.data.middleScroll)
 				{
 					babyArrow.x += 310;
 					if(i > 1) { //Up and Right
@@ -479,10 +479,10 @@ class EditorPlayState extends MusicBeatSubstate
 
 	public function finishSong():Void
 	{
-		if(ClientPrefs.data.noteOffset <= 0) {
+		if(Settings.data.noteOffset <= 0) {
 			endSong();
 		} else {
-			finishTimer = new FlxTimer().start(ClientPrefs.data.noteOffset / 1000, function(tmr:FlxTimer) {
+			finishTimer = new FlxTimer().start(Settings.data.noteOffset / 1000, function(tmr:FlxTimer) {
 				endSong();
 			});
 		}
@@ -519,10 +519,10 @@ class EditorPlayState extends MusicBeatSubstate
 
 	private function popUpScore(note:Note = null):Void
 	{
-		var noteDiff:Float = Math.abs(note.strumTime - Conductor.songPosition + ClientPrefs.data.ratingOffset);
+		var noteDiff:Float = Math.abs(note.strumTime - Conductor.songPosition + Settings.data.ratingOffset);
 		vocals.volume = 1;
 
-		if (!ClientPrefs.data.comboStacking && comboGroup.members.length > 0)
+		if (!Settings.data.comboStacking && comboGroup.members.length > 0)
 		{
 			for (spr in comboGroup)
 			{
@@ -552,7 +552,7 @@ class EditorPlayState extends MusicBeatSubstate
 			songHits++;
 
 		var uiFolder:String = "";
-		var antialias:Bool = ClientPrefs.data.antialiasing;
+		var antialias:Bool = Settings.data.antialiasing;
 		if (PlayState.stageUI != "normal")
 		{
 			uiFolder = PlayState.uiPrefix + "UI/";
@@ -566,9 +566,9 @@ class EditorPlayState extends MusicBeatSubstate
 		rating.acceleration.y = 550 * playbackRate * playbackRate;
 		rating.velocity.y -= FlxG.random.int(140, 175) * playbackRate;
 		rating.velocity.x -= FlxG.random.int(0, 10) * playbackRate;
-		rating.visible = (!ClientPrefs.data.hideHud && showRating);
-		rating.x += ClientPrefs.data.comboOffset[0];
-		rating.y -= ClientPrefs.data.comboOffset[1];
+		rating.visible = (!Settings.data.hideHud && showRating);
+		rating.x += Settings.data.comboOffset[0];
+		rating.y -= Settings.data.comboOffset[1];
 		rating.antialiasing = antialias;
 
 		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(uiFolder + 'combo' + PlayState.uiPostfix));
@@ -576,9 +576,9 @@ class EditorPlayState extends MusicBeatSubstate
 		comboSpr.x = placement;
 		comboSpr.acceleration.y = FlxG.random.int(200, 300) * playbackRate * playbackRate;
 		comboSpr.velocity.y -= FlxG.random.int(140, 160) * playbackRate;
-		comboSpr.visible = (!ClientPrefs.data.hideHud && showCombo);
-		comboSpr.x += ClientPrefs.data.comboOffset[0];
-		comboSpr.y -= ClientPrefs.data.comboOffset[1];
+		comboSpr.visible = (!Settings.data.hideHud && showCombo);
+		comboSpr.x += Settings.data.comboOffset[0];
+		comboSpr.y -= Settings.data.comboOffset[1];
 		comboSpr.antialiasing = antialias;
 		comboSpr.y += 60;
 		comboSpr.velocity.x += FlxG.random.int(1, 10) * playbackRate;
@@ -608,8 +608,8 @@ class EditorPlayState extends MusicBeatSubstate
 		{
 			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image(uiFolder + 'num' + Std.parseInt(separatedScore.charAt(i)) + PlayState.uiPostfix));
 			numScore.screenCenter();
-			numScore.x = placement + (43 * daLoop) - 90 + ClientPrefs.data.comboOffset[2];
-			numScore.y += 80 - ClientPrefs.data.comboOffset[3];
+			numScore.x = placement + (43 * daLoop) - 90 + Settings.data.comboOffset[2];
+			numScore.y += 80 - Settings.data.comboOffset[3];
 
 			if (!PlayState.isPixelStage) numScore.setGraphicSize(Std.int(numScore.width * 0.5));
 			else numScore.setGraphicSize(Std.int(numScore.width * PlayState.daPixelZoom));
@@ -618,7 +618,7 @@ class EditorPlayState extends MusicBeatSubstate
 			numScore.acceleration.y = FlxG.random.int(200, 300) * playbackRate * playbackRate;
 			numScore.velocity.y -= FlxG.random.int(140, 160) * playbackRate;
 			numScore.velocity.x = FlxG.random.float(-5, 5) * playbackRate;
-			numScore.visible = !ClientPrefs.data.hideHud;
+			numScore.visible = !Settings.data.hideHud;
 			numScore.antialiasing = antialias;
 
 			//if (combo >= 10 || combo == 0)
@@ -683,7 +683,7 @@ class EditorPlayState extends MusicBeatSubstate
 
 		plrInputNotes.sort(PlayState.sortHitNotes);
 
-		var shouldMiss:Bool = !ClientPrefs.data.ghostTapping;
+		var shouldMiss:Bool = !Settings.data.ghostTapping;
 
 		if (plrInputNotes.length != 0) { // slightly faster than doing `> 0` lol
 			var funnyNote:Note = plrInputNotes[0]; // front note

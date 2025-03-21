@@ -92,7 +92,7 @@ class GameOverSubstate extends MusicBeatSubstate
 			overlay.frames = Paths.getSparrowAtlas('Pico_Death_Retry');
 			overlay.animation.addByPrefix('deathLoop', 'Retry Text Loop', 24, true);
 			overlay.animation.addByPrefix('deathConfirm', 'Retry Text Confirm', 24, false);
-			overlay.antialiasing = ClientPrefs.data.antialiasing;
+			overlay.antialiasing = Settings.data.antialiasing;
 			overlayConfirmOffsets.set(250, 200);
 			overlay.visible = false;
 			add(overlay);
@@ -118,7 +118,7 @@ class GameOverSubstate extends MusicBeatSubstate
 				var neneKnife:FlxSprite = new FlxSprite(boyfriend.x - 450, boyfriend.y - 250);
 				neneKnife.frames = Paths.getSparrowAtlas('NeneKnifeToss');
 				neneKnife.animation.addByPrefix('anim', 'knife toss', 24, false);
-				neneKnife.antialiasing = ClientPrefs.data.antialiasing;
+				neneKnife.antialiasing = Settings.data.antialiasing;
 				neneKnife.animation.finishCallback = function(_)
 				{
 					remove(neneKnife);
@@ -182,7 +182,7 @@ class GameOverSubstate extends MusicBeatSubstate
 						coolStartDeath(0.2);
 						
 						var exclude:Array<Int> = [];
-						//if(!ClientPrefs.cursing) exclude = [1, 3, 8, 13, 17, 21];
+						//if(!Settings.cursing) exclude = [1, 3, 8, 13, 17, 21];
 	
 						FlxG.sound.play(Paths.sound('jeffGameover/jeffGameover-' + FlxG.random.int(1, 25, exclude)), 1, false, null, true, function() {
 							if(!isEnding)

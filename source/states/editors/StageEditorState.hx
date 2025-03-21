@@ -1895,7 +1895,7 @@ class StageEditorMetaSprite
 	public var antialiasing(default, set):Bool = true;
 	function set_antialiasing(v:Bool)
 	{
-		sprite.antialiasing = (v && ClientPrefs.data.antialiasing);
+		sprite.antialiasing = (v && Settings.data.antialiasing);
 		return (antialiasing = v);
 	}
 

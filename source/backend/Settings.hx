@@ -5,57 +5,78 @@ import flixel.input.keyboard.FlxKey;
 import flixel.input.gamepad.FlxGamepadInputID;
 
 // Add a variable here and it will get automatically saved
-@:structInit class SaveVariables {
-	public var downScroll:Bool = false;
-	public var middleScroll:Bool = false;
-	public var opponentStrums:Bool = true;
-	public var showFPS:Bool = true;
-	public var flashing:Bool = true;
-	public var autoPause:Bool = true;
-	public var antialiasing:Bool = true;
-	public var noteSkin:String = 'Default';
-	public var splashSkin:String = 'Psych';
-	public var splashAlpha:Float = 0.6;
-	public var lowQuality:Bool = false;
-	public var shaders:Bool = true;
-	public var cacheOnGPU:Bool = #if !switch false #else true #end; // GPU Caching made by Raltyro
-	public var framerate:Int = 60;
-	public var camZooms:Bool = true;
-	public var hideHud:Bool = false;
-	public var noteOffset:Int = 0;
-	public var arrowRGB:Array<Array<FlxColor>> = [
+@:structInit 
+@:publicFields
+class SaveVariables 
+{
+	// -- Graphic Settings -- // 
+
+	var lowQuality:Bool = false;
+	var antialiasing:Bool = true;
+	var shaders:Bool = true;
+	var cacheOnGPU:Bool = false;
+	var framerate:Int = 60;
+	
+	// -- Visual Settings -- //
+
+	var noteSkin:String = 'Default';
+	var splashSkin:String = 'Psych';
+	var splashAlpha:Float = 0.6;
+	var hideHud:Bool = false;
+	var timeBarType:String = 'Time Left';
+	var flashing:Bool = true;
+	var camZooms:Bool = true;
+	var scoreZoom:Bool = true;
+	var healthBarAlpha:Float = 1;
+	var pauseMusic:String = 'Tea Time';
+	var discordRPC:Bool = true;
+	var comboStacking:Bool = true;
+
+	// -- Gameplay Settings -- //
+	
+	var noteOffset:Int = 0;
+	var downScroll:Bool = false;
+	var middleScroll:Bool = false;
+	var opponentStrums:Bool = true;
+	var ghostTapping:Bool = true;
+	var autoPause:Bool = true;
+	var showFPS:Bool = true;
+	var noReset:Bool = false;
+	var hitsoundVolume:Float = 0;
+	var ratingOffset:Int = 0;
+	var sickWindow:Int = 45;
+	var goodWindow:Int = 90;
+	var badWindow:Int = 135;
+	var safeFrames:Float = 10;
+	var guitarHeroSustains:Bool = true;
+
+	// -- Note Colors -- //
+	
+	var arrowRGB:Array<Array<FlxColor>> = 
+	[
 		[0xFFC24B99, 0xFFFFFFFF, 0xFF3C1F56],
 		[0xFF00FFFF, 0xFFFFFFFF, 0xFF1542B7],
 		[0xFF12FA05, 0xFFFFFFFF, 0xFF0A4447],
-		[0xFFF9393F, 0xFFFFFFFF, 0xFF651038]];
-	public var arrowRGBPixel:Array<Array<FlxColor>> = [
+		[0xFFF9393F, 0xFFFFFFFF, 0xFF651038]
+	];
+	var arrowRGBPixel:Array<Array<FlxColor>> = 
+	[
 		[0xFFE276FF, 0xFFFFF9FF, 0xFF60008D],
 		[0xFF3DCAFF, 0xFFF4FFFF, 0xFF003060],
 		[0xFF71E300, 0xFFF6FFE6, 0xFF003100],
-		[0xFFFF884E, 0xFFFFFAF5, 0xFF6C0000]];
+		[0xFFFF884E, 0xFFFFFAF5, 0xFF6C0000]
+	];
 
-	public var ghostTapping:Bool = true;
-	public var timeBarType:String = 'Time Left';
-	public var scoreZoom:Bool = true;
-	public var noReset:Bool = false;
-	public var healthBarAlpha:Float = 1;
-	public var hitsoundVolume:Float = 0;
-	public var pauseMusic:String = 'Tea Time';
-	public var checkForUpdates:Bool = true;
-	public var comboStacking:Bool = true;
-	public var gameplaySettings:Map<String, Dynamic> = [
+	// -- Misc. -- //
+
+	var checkForUpdates:Bool = false;
+	var comboOffset:Array<Int> = [0, 0, 0, 0];
+	var loadingScreen:Bool = true;
+	var language:String = 'en-US';
+	var gameplaySettings:Map<String, Dynamic> = 
+	[
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative', 
-		// anyone reading this, amod is multiplicative speed mod, cmod is constant speed mod, and xmod is bpm based speed mod.
-		// an amod example would be chartSpeed * multiplier
-		// cmod would just be constantSpeed = chartSpeed
-		// and xmod basically works by basing the speed on the bpm.
-		// iirc (beatsPerSecond * (conductorToNoteDifference / 1000)) * noteSize (110 or something like that depending on it, prolly just use note.height)
-		// bps is calculated by bpm / 60
-		// oh yeah and you'd have to actually convert the difference to seconds which I already do, because this is based on beats and stuff. but it should work
-		// just fine. but I wont implement it because I don't know how you handle sustains and other stuff like that.
-		// oh yeah when you calculate the bps divide it by the songSpeed or rate because it wont scroll correctly when speeds exist.
-		// -kade
 		'songspeed' => 1.0,
 		'healthgain' => 1.0,
 		'healthloss' => 1.0,
@@ -64,20 +85,10 @@ import flixel.input.gamepad.FlxGamepadInputID;
 		'botplay' => false,
 		'opponentplay' => false
 	];
-
-	public var comboOffset:Array<Int> = [0, 0, 0, 0];
-	public var ratingOffset:Int = 0;
-	public var sickWindow:Float = 45.0;
-	public var goodWindow:Float = 90.0;
-	public var badWindow:Float = 135.0;
-	public var safeFrames:Float = 10.0;
-	public var guitarHeroSustains:Bool = true;
-	public var discordRPC:Bool = true;
-	public var loadingScreen:Bool = true;
-	public var language:String = 'en-US';
 }
 
-class ClientPrefs {
+class Settings 
+{
 	public static var data:SaveVariables = {};
 	public static var defaultData:SaveVariables = {};
 
@@ -125,7 +136,7 @@ class ClientPrefs {
 	public static var defaultKeys:Map<String, Array<FlxKey>> = null;
 	public static var defaultButtons:Map<String, Array<FlxGamepadInputID>> = null;
 
-	public static function resetKeys(controller:Null<Bool> = null) //Null = both, False = Keyboard, True = Controller
+	public static function reset(controller:Null<Bool> = null) //Null = both, False = Keyboard, True = Controller
 	{
 		if(controller != true)
 			for (key in keyBinds.keys())
@@ -152,7 +163,8 @@ class ClientPrefs {
 		defaultButtons = gamepadBinds.copy();
 	}
 
-	public static function saveSettings() {
+	public static function save() 
+	{
 		for (key in Reflect.fields(data))
 			Reflect.setField(FlxG.save.data, key, Reflect.field(data, key));
 
@@ -168,7 +180,8 @@ class ClientPrefs {
 		FlxG.log.add("Settings saved!");
 	}
 
-	public static function loadPrefs() {
+	public static function load() 
+	{
 		#if ACHIEVEMENTS_ALLOWED Achievements.load(); #end
 
 		for (key in Reflect.fields(data))
@@ -179,7 +192,7 @@ class ClientPrefs {
 			Main.fpsVar.visible = data.showFPS;
 
 		#if (!html5 && !switch)
-		FlxG.autoPause = ClientPrefs.data.autoPause;
+		FlxG.autoPause = Settings.data.autoPause;
 
 		if(FlxG.save.data.framerate == null) {
 			final refreshRate:Int = FlxG.stage.application.window.displayMode.refreshRate;

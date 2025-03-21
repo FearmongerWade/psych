@@ -56,7 +56,7 @@ class MainMenuState extends MusicBeatState
 
 		var yScroll:Float = 0.25;
 		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
-		bg.antialiasing = ClientPrefs.data.antialiasing;
+		bg.antialiasing = Settings.data.antialiasing;
 		bg.scrollFactor.set(0, yScroll);
 		bg.setGraphicSize(Std.int(bg.width * 1.175));
 		bg.updateHitbox();
@@ -67,7 +67,7 @@ class MainMenuState extends MusicBeatState
 		add(camFollow);
 
 		magenta = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat'));
-		magenta.antialiasing = ClientPrefs.data.antialiasing;
+		magenta.antialiasing = Settings.data.antialiasing;
 		magenta.scrollFactor.set(0, yScroll);
 		magenta.setGraphicSize(Std.int(magenta.width * 1.175));
 		magenta.updateHitbox();
@@ -116,7 +116,7 @@ class MainMenuState extends MusicBeatState
 		#end
 
 		#if CHECK_FOR_UPDATES
-		if (showOutdatedWarning && ClientPrefs.data.checkForUpdates && substates.OutdatedSubState.updateVersion != psychEngineVersion) {
+		if (showOutdatedWarning && Settings.data.checkForUpdates && substates.OutdatedSubState.updateVersion != psychEngineVersion) {
 			persistentUpdate = false;
 			showOutdatedWarning = false;
 			openSubState(new substates.OutdatedSubState());
@@ -135,7 +135,7 @@ class MainMenuState extends MusicBeatState
 		menuItem.animation.play('idle');
 		menuItem.updateHitbox();
 		
-		menuItem.antialiasing = ClientPrefs.data.antialiasing;
+		menuItem.antialiasing = Settings.data.antialiasing;
 		menuItem.scrollFactor.set();
 		menuItems.add(menuItem);
 		return menuItem;
@@ -269,7 +269,7 @@ class MainMenuState extends MusicBeatState
 				selectedSomethin = true;
 				FlxG.mouse.visible = false;
 
-				if (ClientPrefs.data.flashing)
+				if (Settings.data.flashing)
 					FlxFlicker.flicker(magenta, 1.1, 0.15, false);
 
 				var item:FlxSprite;

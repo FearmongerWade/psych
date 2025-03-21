@@ -47,7 +47,7 @@ class Main extends Sprite
 		addChild(new FlxGame(game.width, game.height, InitState, game.framerate, game.framerate, game.skipSplash, game.startFullscreen));
 
 		addChild(fpsVar = new FPSCounter(10, 3, 0xFFFFFF));
-		fpsVar.visible = ClientPrefs.data.showFPS;
+		fpsVar.visible = Settings.data.showFPS;
 
 		Lib.current.stage.align = "tl";
 		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;

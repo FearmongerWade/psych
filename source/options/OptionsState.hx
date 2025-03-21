@@ -46,7 +46,7 @@ class OptionsState extends MusicBeatState
 		#end
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-		bg.antialiasing = ClientPrefs.data.antialiasing;
+		bg.antialiasing = Settings.data.antialiasing;
 		bg.color = 0xFFea71fd;
 		bg.updateHitbox();
 
@@ -70,7 +70,7 @@ class OptionsState extends MusicBeatState
 		add(selectorRight);
 
 		changeSelection();
-		ClientPrefs.saveSettings();
+		Settings.save();
 
 		super.create();
 	}
@@ -78,7 +78,7 @@ class OptionsState extends MusicBeatState
 	override function closeSubState()
 	{
 		super.closeSubState();
-		ClientPrefs.saveSettings();
+		Settings.save();
 		#if DISCORD_ALLOWED
 		DiscordClient.changePresence("Options Menu", null);
 		#end
@@ -128,7 +128,7 @@ class OptionsState extends MusicBeatState
 
 	override function destroy()
 	{
-		ClientPrefs.loadPrefs();
+		Settings.load();
 		super.destroy();
 	}
 }

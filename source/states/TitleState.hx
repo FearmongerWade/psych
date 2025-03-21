@@ -100,16 +100,16 @@ class TitleState extends MusicBeatState
 
 		logoBl = new FlxSprite(logoPosition.x, logoPosition.y);
 		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
-		logoBl.antialiasing = ClientPrefs.data.antialiasing;
+		logoBl.antialiasing = Settings.data.antialiasing;
 
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
 		logoBl.animation.play('bump');
 		logoBl.updateHitbox();
 
 		gfDance = new FlxSprite(gfPosition.x, gfPosition.y);
-		gfDance.antialiasing = ClientPrefs.data.antialiasing;
+		gfDance.antialiasing = Settings.data.antialiasing;
 		
-		if(ClientPrefs.data.shaders)
+		if(Settings.data.shaders)
 		{
 			swagShader = new ColorSwap();
 			gfDance.shader = swagShader.shader;
@@ -142,7 +142,7 @@ class TitleState extends MusicBeatState
 		if (newTitle = animFrames.length > 0)
 		{
 			titleText.animation.addByPrefix('idle', "ENTER IDLE", 24);
-			titleText.animation.addByPrefix('press', ClientPrefs.data.flashing ? "ENTER PRESSED" : "ENTER FREEZE", 24);
+			titleText.animation.addByPrefix('press', Settings.data.flashing ? "ENTER PRESSED" : "ENTER FREEZE", 24);
 		}
 		else
 		{
@@ -166,7 +166,7 @@ class TitleState extends MusicBeatState
 		ngSpr.setGraphicSize(Std.int(ngSpr.width * 0.8));
 		ngSpr.updateHitbox();
 		ngSpr.screenCenter(X);
-		ngSpr.antialiasing = ClientPrefs.data.antialiasing;
+		ngSpr.antialiasing = Settings.data.antialiasing;
 
 		add(gfDance);
 		add(logoBl); //FNF Logo
@@ -218,7 +218,7 @@ class TitleState extends MusicBeatState
 					if (titleJSON.backgroundSprite != null && titleJSON.backgroundSprite.trim().length > 0)
 					{
 						var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image(titleJSON.backgroundSprite));
-						bg.antialiasing = ClientPrefs.data.antialiasing;
+						bg.antialiasing = Settings.data.antialiasing;
 						add(bg);
 					}
 				}
@@ -350,7 +350,7 @@ class TitleState extends MusicBeatState
 				
 				if(titleText != null) titleText.animation.play('press');
 				
-				FlxG.camera.flash(ClientPrefs.data.flashing ? FlxColor.WHITE : 0x4CFFFFFF, 1);
+				FlxG.camera.flash(Settings.data.flashing ? FlxColor.WHITE : 0x4CFFFFFF, 1);
 				FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
 
 				transitioning = true;

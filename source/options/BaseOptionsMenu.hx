@@ -41,7 +41,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.color = 0xFFea71fd;
 		bg.screenCenter();
-		bg.antialiasing = ClientPrefs.data.antialiasing;
+		bg.antialiasing = Settings.data.antialiasing;
 		add(bg);
 
 		// avoids lagspikes while scrolling through menus!
@@ -177,7 +177,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 	
 						bindingKey = true;
 						holdingEsc = 0;
-						ClientPrefs.toggleVolumeKeys(false);
+						Settings.toggleVolumeKeys(false);
 						FlxG.sound.play(Paths.sound('scrollMenu'));
 					}
 
@@ -455,7 +455,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 
 		bindingText2.destroy();
 		remove(bindingText2);
-		ClientPrefs.toggleVolumeKeys(true);
+		Settings.toggleVolumeKeys(true);
 	}
 
 	function updateTextFrom(option:Option) {

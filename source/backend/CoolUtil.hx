@@ -9,7 +9,7 @@ class CoolUtil
 		if (url == null || url.length == 0)
 			url = "https://raw.githubusercontent.com/ShadowMario/FNF-PsychEngine/main/gitVersion.txt";
 		var version:String = states.MainMenuState.psychEngineVersion.trim();
-		if(ClientPrefs.data.checkForUpdates) {
+		if(Settings.data.checkForUpdates) {
 			trace('checking for updates...');
 			var http = new haxe.Http(url);
 			http.onData = function (data:String)

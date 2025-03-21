@@ -21,13 +21,13 @@ class DiscordClient
 
 	public static function check()
 	{
-		if(ClientPrefs.data.discordRPC) initialize();
+		if(Settings.data.discordRPC) initialize();
 		else if(isInitialized) shutdown();
 	}
 	
 	public static function prepare()
 	{
-		if (!isInitialized && ClientPrefs.data.discordRPC)
+		if (!isInitialized && Settings.data.discordRPC)
 			initialize();
 
 		Application.current.window.onClose.add(function() {

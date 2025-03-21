@@ -9,7 +9,7 @@ class InitState extends flixel.FlxState
         FlxG.fixedTimestep = false;
         FlxG.game.focusLostFramerate = 10;
 		FlxG.keys.preventDefaultKeys = [TAB];
-        FlxG.drawFramerate = FlxG.updateFramerate = ClientPrefs.data.framerate;
+        FlxG.drawFramerate = FlxG.updateFramerate = Settings.data.framerate;
         FlxG.mouse.visible = false;
 
         // -- Settings -- // 
@@ -17,8 +17,8 @@ class InitState extends flixel.FlxState
         FlxG.save.bind('funkin', CoolUtil.getSavePath());
 
         Controls.instance = new Controls();
-        ClientPrefs.loadDefaultKeys();
-		ClientPrefs.loadPrefs();
+        Settings.loadDefaultKeys();
+		Settings.load();
 
         AlphaCharacter.loadAlphabetData();
         Highscore.load();

@@ -58,7 +58,7 @@ class NotesColorSubState extends MusicBeatSubstate
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.color = 0xFFEA71FD;
 		bg.screenCenter();
-		bg.antialiasing = ClientPrefs.data.antialiasing;
+		bg.antialiasing = Settings.data.antialiasing;
 		add(bg);
 
 		var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
@@ -474,8 +474,8 @@ class NotesColorSubState extends MusicBeatSubstate
 				for (i in 0...3)
 				{
 					var strumRGB:RGBShaderReference = myNotes.members[curSelectedNote].rgbShader;
-					var color:FlxColor = !onPixel ? ClientPrefs.defaultData.arrowRGB[curSelectedNote][i] :
-													ClientPrefs.defaultData.arrowRGBPixel[curSelectedNote][i];
+					var color:FlxColor = !onPixel ? Settings.defaultData.arrowRGB[curSelectedNote][i] :
+													Settings.defaultData.arrowRGBPixel[curSelectedNote][i];
 					switch(i)
 					{
 						case 0:
@@ -488,7 +488,7 @@ class NotesColorSubState extends MusicBeatSubstate
 					dataArray[curSelectedNote][i] = color;
 				}
 			}
-			setShaderColor(!onPixel ? ClientPrefs.defaultData.arrowRGB[curSelectedNote][curSelectedMode] : ClientPrefs.defaultData.arrowRGBPixel[curSelectedNote][curSelectedMode]);
+			setShaderColor(!onPixel ? Settings.defaultData.arrowRGB[curSelectedNote][curSelectedMode] : Settings.defaultData.arrowRGBPixel[curSelectedNote][curSelectedMode]);
 			FlxG.sound.play(Paths.sound('cancelMenu'), 0.6);
 			updateColors();
 		}
@@ -577,7 +577,7 @@ class NotesColorSubState extends MusicBeatSubstate
 	var bigNote:Note;
 	public function spawnNotes()
 	{
-		dataArray = !onPixel ? ClientPrefs.data.arrowRGB : ClientPrefs.data.arrowRGBPixel;
+		dataArray = !onPixel ? Settings.data.arrowRGB : Settings.data.arrowRGBPixel;
 		if (onPixel) PlayState.stageUI = "pixel";
 
 		// clear groups
@@ -606,7 +606,7 @@ class NotesColorSubState extends MusicBeatSubstate
 		// respawn stuff
 		var res:Int = onPixel ? 160 : 17;
 		skinNote = new FlxSprite(48, 24).loadGraphic(Paths.image('noteColorMenu/' + (onPixel ? 'note' : 'notePixel')), true, res, res);
-		skinNote.antialiasing = ClientPrefs.data.antialiasing;
+		skinNote.antialiasing = Settings.data.antialiasing;
 		skinNote.setGraphicSize(68);
 		skinNote.updateHitbox();
 		skinNote.animation.add('anim', [0], 24, true);
@@ -618,7 +618,7 @@ class NotesColorSubState extends MusicBeatSubstate
 		for (i in 0...3)
 		{
 			var newNote:FlxSprite = new FlxSprite(230 + (100 * i), 100).loadGraphic(Paths.image('noteColorMenu/' + (!onPixel ? 'note' : 'notePixel')), true, res, res);
-			newNote.antialiasing = ClientPrefs.data.antialiasing;
+			newNote.antialiasing = Settings.data.antialiasing;
 			newNote.setGraphicSize(85);
 			newNote.updateHitbox();
 			newNote.animation.add('anim', [i], 24, true);
