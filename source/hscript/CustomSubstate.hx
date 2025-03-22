@@ -1,4 +1,4 @@
-package psychlua;
+package hscript;
 
 import flixel.FlxObject;
 
@@ -6,16 +6,6 @@ class CustomSubstate extends MusicBeatSubstate
 {
 	public static var name:String = 'unnamed';
 	public static var instance:CustomSubstate;
-
-	#if LUA_ALLOWED
-	public static function implement(funk:FunkinLua)
-	{
-		var lua = funk.lua;
-		Lua_helper.add_callback(lua, "openCustomSubstate", openCustomSubstate);
-		Lua_helper.add_callback(lua, "closeCustomSubstate", closeCustomSubstate);
-		Lua_helper.add_callback(lua, "insertToCustomSubstate", insertToCustomSubstate);
-	}
-	#end
 	
 	public static function openCustomSubstate(name:String, ?pauseGame:Bool = false)
 	{
@@ -63,7 +53,6 @@ class CustomSubstate extends MusicBeatSubstate
 	{
 		instance = this;
 		PlayState.instance.setOnHScript('customSubstate', instance);
-
 
 		PlayState.instance.callOnScripts('onCustomSubstateCreate', [name]);
 		super.create();

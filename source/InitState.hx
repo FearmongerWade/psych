@@ -33,11 +33,6 @@ class InitState extends flixel.FlxState
 		if(FlxG.save.data != null && FlxG.save.data.fullscreen)
 			FlxG.fullscreen = FlxG.save.data.fullscreen;
 
-        // count your days lua
-
-        #if LUA_ALLOWED
-		Mods.pushGlobalMods();
-		#end
 		Mods.loadTopMod();
 
         // -- -- -- //

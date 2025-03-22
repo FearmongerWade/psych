@@ -1,6 +1,6 @@
-package psychlua;
+package hscript;
 
-class DebugLuaText extends FlxText
+class DebugText extends FlxText
 {
 	public var disableTime:Float = 6;
 	public function new() {

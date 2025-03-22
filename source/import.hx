@@ -4,12 +4,6 @@
 import backend.Discord;
 #end
 
-//Psych
-#if LUA_ALLOWED
-import llua.*;
-import llua.Lua;
-#end
-
 #if AWARDS_ALLOWED
 import backend.Awards;
 #end

@@ -5,10 +5,6 @@ import objects.AwardPopup;
 import haxe.Exception;
 import haxe.Json;
 
-#if LUA_ALLOWED
-import psychlua.FunkinLua;
-#end
-
 typedef Award =
 {
 	var name:String;

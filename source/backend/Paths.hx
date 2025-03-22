@@ -193,9 +193,6 @@ class Paths
 	inline static public function shaderVertex(key:String, ?folder:String)
 		return getPath('shaders/$key.vert', TEXT, folder, true);
 
-	inline static public function lua(key:String, ?folder:String)
-		return getPath('$key.lua', TEXT, folder, true);
-
 	static public function video(key:String)
 	{
 		#if MODS_ALLOWED
