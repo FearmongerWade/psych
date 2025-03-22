@@ -10,7 +10,7 @@ enum SpraycanState
 
 class SpraycanAtlasSprite extends FlxSpriteGroup
 {
-	final darnelloiledup:String = 'backgrounds/weekend1/';
+	final darnelloiledup:String = 'backgrounds/weekend/';
 
 	public var currentState:SpraycanState = WAITING;
 

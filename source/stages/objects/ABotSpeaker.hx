@@ -6,7 +6,7 @@ import funkin.vis.dsp.SpectralAnalyzer;
 
 class ABotSpeaker extends FlxSpriteGroup
 {
-	final nenebuttsex:String = 'backgrounds/weekend1/';
+	final nenebuttsex:String = 'backgrounds/weekend/';
 
 	final VIZ_MAX = 7; //ranges from viz1 to viz7
 	final VIZ_POS_X:Array<Float> = [0, 59, 56, 66, 54, 52, 51];

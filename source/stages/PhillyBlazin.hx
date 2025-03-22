@@ -12,7 +12,7 @@ import objects.Note;
 
 class PhillyBlazin extends BaseStage
 {
-	final path:String = 'backgrounds/weekend1/';
+	final path:String = 'backgrounds/weekend/';
 
 	var rainShader:RainShader;
 	var rainTimeScale:Float = 1;

@@ -24,7 +24,7 @@ enum NeneState
 
 class PhillyStreets extends BaseStage
 {
-	final path:String = 'backgrounds/weekend1/';
+	final path:String = 'backgrounds/weekend/';
 	
 	final MIN_BLINK_DELAY:Int = 3;
 	final MAX_BLINK_DELAY:Int = 7;
@@ -185,7 +185,7 @@ class PhillyStreets extends BaseStage
 			if(!noteTypes.contains(note.noteType)) noteTypes.push(note.noteType);
 		}
 
-		spraycanPile = new BGSprite('SpraycanPile', 920, 1045, 1, 1);
+		spraycanPile = new BGSprite('${path}SpraycanPile', 920, 1045, 1, 1);
 		precache();
 		add(spraycanPile);
 		darkenable.push(spraycanPile);
