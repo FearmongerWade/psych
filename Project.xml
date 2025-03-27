@@ -39,6 +39,7 @@
 	<assets path="assets" />
 
 	<!-- OpenAL config -->
+	
 	<section if="desktop">
 		<assets path="meta/alsoft.txt" rename="plugins/alsoft.ini" type="text" if="windows"/>
 		<assets path="meta/alsoft.txt" rename="plugins/alsoft.conf" type="text" unless="windows"/>
