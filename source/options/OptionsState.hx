@@ -8,7 +8,7 @@ class OptionsState extends MusicBeatState
 	var options:Array<String> = [
 		'Note Colors',
 		'Controls',
-		'Adjust Delay and Combo',
+		'Adjust Delay',
 		'Graphics',
 		'Visuals',
 		'Gameplay'
@@ -31,7 +31,7 @@ class OptionsState extends MusicBeatState
 				openSubState(new options.VisualsSettingsSubState());
 			case 'Gameplay':
 				openSubState(new options.GameplaySettingsSubState());
-			case 'Adjust Delay and Combo':
+			case 'Adjust Delay':
 				MusicBeatState.switchState(new options.NoteOffsetState());
 		}
 	}

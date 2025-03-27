@@ -68,8 +68,7 @@ class SaveVariables
 	];
 
 	// -- Misc. -- //
-
-	var comboOffset:Array<Int> = [0, 0, 0, 0];
+	
 	var loadingScreen:Bool = true;
 	var language:String = 'en-US';
 	var gameplaySettings:Map<String, Dynamic> = 
