@@ -557,7 +557,7 @@ class WeekEditorFreeplayState extends MusicBeatState implements PsychUIEventHand
 	var curSelected = 0;
 
 	override function create() {
-		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+		bg = new FlxSprite().loadGraphic(Paths.image('menus/MenuDesat'));
 		bg.antialiasing = Settings.data.antialiasing;
 		bg.color = FlxColor.WHITE;
 		add(bg);

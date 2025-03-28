@@ -55,7 +55,7 @@ class CreditsState extends MusicBeatState
 
 		persistentUpdate = true;
 
-		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+		bg = new FlxSprite().loadGraphic(Paths.image('menus/MenuDesat'));
 		bg.antialiasing = Settings.data.antialiasing;
 		add(bg);
 		bg.screenCenter();
@@ -78,10 +78,10 @@ class CreditsState extends MusicBeatState
 				if(credit[5] != null)
 					Mods.currentModDirectory = credit[5];
 
-				var str:String = 'credits/missing_icon';
+				var str:String = 'menus/credits/missing_icon';
 				if(credit[1] != null && credit[1].length > 0)
 				{
-					var fileName = 'credits/' + credit[1];
+					var fileName = 'menus/credits/' + credit[1];
 					if (Paths.fileExists('images/$fileName.png', IMAGE)) str = fileName;
 					else if (Paths.fileExists('images/$fileName-pixel.png', IMAGE)) str = fileName + '-pixel';
 				}

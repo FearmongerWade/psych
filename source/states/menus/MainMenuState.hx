@@ -31,7 +31,7 @@ class MainMenuState extends MusicBeatState
 		persistentUpdate = persistentDraw = true;
 
 		var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), 0.1);
-		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
+		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menus/menuBG'));
 		bg.antialiasing = Settings.data.antialiasing;
 		bg.scrollFactor.set(0, yScroll);
 		bg.setGraphicSize(Std.int(bg.width * 1.175));
@@ -42,7 +42,7 @@ class MainMenuState extends MusicBeatState
 		camFollow = new FlxObject(0, 0, 1, 1);
 		add(camFollow);
 
-		magenta = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat'));
+		magenta = new FlxSprite(-80).loadGraphic(Paths.image('menus/MenuDesat'));
 		magenta.antialiasing = Settings.data.antialiasing;
 		magenta.scrollFactor.set(0, yScroll);
 		magenta.setGraphicSize(Std.int(magenta.width * 1.175));
@@ -60,12 +60,11 @@ class MainMenuState extends MusicBeatState
 			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
 			var menuItem = new FlxSprite(0, (i * 140) + offset);
 			menuItem.antialiasing = Settings.data.antialiasing;
-			menuItem.frames = Paths.getSparrowAtlas('mainmenu/'+optionShit[i]);
+			menuItem.frames = Paths.getSparrowAtlas('menus/mainmenu/'+optionShit[i]);
 			menuItem.animation.addByPrefix('idle', optionShit[i]+' idle', 24, true);
 			menuItem.animation.addByPrefix('selected', optionShit[i]+' selected', 24, true);
 			menuItem.animation.play('idle');
 			menuItems.add(menuItem);
-			
 			menuItem.scrollFactor.set(0, yScroll);
 			menuItem.updateHitbox();
 			menuItem.screenCenter(X);

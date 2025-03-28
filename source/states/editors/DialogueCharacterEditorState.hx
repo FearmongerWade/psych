@@ -90,7 +90,7 @@ class DialogueCharacterEditorState extends MusicBeatState implements PsychUIEven
 
 		box = new FlxSprite(70, 370);
 		box.antialiasing = Settings.data.antialiasing;
-		box.frames = Paths.getSparrowAtlas('speech_bubble');
+		box.frames = Paths.getSparrowAtlas('dialogue/speech_bubble');
 		box.scrollFactor.set();
 		box.animation.addByPrefix('normal', 'speech bubble normal', 24);
 		box.animation.addByPrefix('center', 'speech bubble middle', 24);

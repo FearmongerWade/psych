@@ -94,7 +94,7 @@ class EditorPlayState extends MusicBeatSubstate
 		if(Settings.data.hitsoundVolume > 0) Paths.sound('hitsound');
 
 		/* setting up Editor PlayState stuff */
-		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menus/MenuDesat'));
 		bg.antialiasing = Settings.data.antialiasing;
 		bg.scrollFactor.set();
 		bg.color = 0xFF101010;

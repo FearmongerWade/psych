@@ -72,7 +72,7 @@ class ControlsSubState extends MusicBeatSubstate
 		options.push([true]);
 		options.push([true, defaultKey]);
 
-		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+		bg = new FlxSprite().loadGraphic(Paths.image('menus/MenuDesat'));
 		bg.color = keyboardColor;
 		bg.antialiasing = Settings.data.antialiasing;
 		bg.screenCenter();
@@ -98,7 +98,7 @@ class ControlsSubState extends MusicBeatSubstate
 		grpBinds = new FlxTypedGroup<Alphabet>();
 		add(grpBinds);
 
-		controllerSpr = new FlxSprite(50, 40).loadGraphic(Paths.image('controllertype'), true, 82, 60);
+		controllerSpr = new FlxSprite(50, 40).loadGraphic(Paths.image('menus/options/controllertype'), true, 82, 60);
 		controllerSpr.antialiasing = Settings.data.antialiasing;
 		controllerSpr.animation.add('keyboard', [0], 1, false);
 		controllerSpr.animation.add('gamepad', [1], 1, false);
@@ -228,7 +228,7 @@ class ControlsSubState extends MusicBeatSubstate
 			switch(alpha.text)
 			{
 				case '[', ']': //Square and Triangle respectively
-					letter.image = 'alphabet_playstation';
+					letter.image = 'menus/options/alphabet_playstation';
 					letter.updateHitbox();
 					
 					letter.offset.x += 4;

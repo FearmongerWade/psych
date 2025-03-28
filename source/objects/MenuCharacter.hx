@@ -26,7 +26,8 @@ class MenuCharacter extends FlxSprite
 		changeCharacter(character);
 	}
 
-	public function changeCharacter(?character:String = 'bf') {
+	public function changeCharacter(?character:String = 'bf')
+	{
 		if(character == null) character = '';
 		if(character == this.character) return;
 
@@ -41,12 +42,13 @@ class MenuCharacter extends FlxSprite
 		alpha = 1;
 
 		hasConfirmAnimation = false;
-		switch(character) {
+		switch(character) 
+		{
 			case '':
 				visible = false;
 				dontPlayAnim = true;
 			default:
-				var characterPath:String = 'images/menucharacters/' + character + '.json';
+				var characterPath:String = 'images/menus/story/characters/' + character + '.json';
 
 				var path:String = Paths.getPath(characterPath, TEXT);
 				#if MODS_ALLOWED
@@ -74,7 +76,7 @@ class MenuCharacter extends FlxSprite
 					trace('Error loading menu character file of "$character": $e');
 				}
 
-				frames = Paths.getSparrowAtlas('menucharacters/' + charFile.image);
+				frames = Paths.getSparrowAtlas('menus/story/characters/' + charFile.image);
 				animation.addByPrefix('idle', charFile.idle_anim, 24);
 
 				var confirmAnim:String = charFile.confirm_anim;

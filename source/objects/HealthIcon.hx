@@ -23,11 +23,13 @@ class HealthIcon extends FlxSprite
 	}
 
 	private var iconOffsets:Array<Float> = [0, 0];
-	public function changeIcon(char:String, ?allowGPU:Bool = true) {
-		if(this.char != char) {
-			var name:String = 'icons/' + char;
-			if(!Paths.fileExists('images/' + name + '.png', IMAGE)) name = 'icons/icon-' + char; //Older versions of psych engine's support
-			if(!Paths.fileExists('images/' + name + '.png', IMAGE)) name = 'icons/icon-face'; //Prevents crash from missing icon
+	public function changeIcon(char:String, ?allowGPU:Bool = true) 
+	{
+		if(this.char != char) 
+		{
+			var name:String = 'HUD/icons/' + char;
+			if(!Paths.fileExists('images/' + name + '.png', IMAGE)) name = 'HUD/icons/icon-' + char; //Older versions of psych engine's support
+			if(!Paths.fileExists('images/' + name + '.png', IMAGE)) name = 'HUD/icons/icon-face'; //Prevents crash from missing icon
 			
 			var graphic = Paths.image(name, allowGPU);
 			var iSize:Float = Math.round(graphic.width / graphic.height);
@@ -58,7 +60,6 @@ class HealthIcon extends FlxSprite
 		}
 	}
 
-	public function getCharacter():String {
+	public function getCharacter():String 
 		return char;
-	}
 }

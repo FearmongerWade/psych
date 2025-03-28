@@ -473,7 +473,7 @@ class PlayState extends MusicBeatState
 		if(Settings.data.downScroll) timeTxt.y = FlxG.height - 44;
 		if(Settings.data.timeBarType == 'Song Name') timeTxt.text = SONG.song;
 
-		timeBar = new Bar(0, timeTxt.y + (timeTxt.height / 4), 'timeBar', function() return songPercent, 0, 1);
+		timeBar = new Bar(0, timeTxt.y + (timeTxt.height / 4), 'HUD/timeBar', function() return songPercent, 0, 1);
 		timeBar.scrollFactor.set();
 		timeBar.screenCenter(X);
 		timeBar.alpha = 0;
@@ -511,7 +511,7 @@ class PlayState extends MusicBeatState
 		FlxG.worldBounds.set(0, 0, FlxG.width, FlxG.height);
 		moveCameraSection();
 
-		healthBar = new Bar(0, FlxG.height * (!Settings.data.downScroll ? 0.89 : 0.11), 'healthBar', function() return health, 0, 2);
+		healthBar = new Bar(0, FlxG.height * (!Settings.data.downScroll ? 0.89 : 0.11), 'HUD/healthBar', function() return health, 0, 2);
 		healthBar.screenCenter(X);
 		healthBar.leftToRight = false;
 		healthBar.scrollFactor.set();
@@ -872,9 +872,9 @@ class PlayState extends MusicBeatState
 	{
 		var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
 		var introImagesArray:Array<String> = switch(stageUI) {
-			case "pixel": ['pixelUI/ready-pixel', 'pixelUI/set-pixel', 'pixelUI/date-pixel'];
+			case "pixel": ['pixel/ready-pixel', 'pixel/set-pixel', 'pixel/date-pixel'];
 			case "normal": ["ready", "set" ,"go"];
-			default: ['${uiPrefix}UI/ready${uiPostfix}', '${uiPrefix}UI/set${uiPostfix}', '${uiPrefix}UI/go${uiPostfix}'];
+			default: ['${uiPrefix}/ready${uiPostfix}', '${uiPrefix}/set${uiPostfix}', '${uiPrefix}/go${uiPostfix}'];
 		}
 		introAssets.set(stageUI, introImagesArray);
 		var introAlts:Array<String> = introAssets.get(stageUI);
@@ -936,7 +936,7 @@ class PlayState extends MusicBeatState
 
 				var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
 				var introImagesArray:Array<String> = switch(stageUI) {
-					case "pixel": ['pixelUI/ready-pixel', 'pixelUI/set-pixel', 'pixelUI/date-pixel'];
+					case "pixel": ['pixel/ready-pixel', 'pixel/set-pixel', 'pixel/date-pixel'];
 					case "normal": ["ready", "set" ,"go"];
 					default: ['${uiPrefix}UI/ready${uiPostfix}', '${uiPrefix}UI/set${uiPostfix}', '${uiPrefix}UI/go${uiPostfix}'];
 				}
@@ -991,7 +991,7 @@ class PlayState extends MusicBeatState
 
 	inline private function createCountdownSprite(image:String, antialias:Bool):FlxSprite
 	{
-		var spr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(image));
+		var spr:FlxSprite = new FlxSprite().loadGraphic(Paths.image('HUD/'+image));
 		spr.cameras = [camHUD];
 		spr.scrollFactor.set();
 		spr.updateHitbox();
@@ -2464,9 +2464,9 @@ class PlayState extends MusicBeatState
 
 	private function cachePopUpScore()
 	{
-		var uiFolder:String = "";
+		var uiFolder:String = "HUD/";
 		if (stageUI != "normal")
-			uiFolder = uiPrefix + "UI/";
+			uiFolder = uiPrefix + "HUD/pixel/";
 
 		for (rating in ratingsData)
 			Paths.image(uiFolder + rating.image + uiPostfix);
@@ -2516,11 +2516,11 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		var uiFolder:String = "";
+		var uiFolder:String = "HUD/";
 		var antialias:Bool = Settings.data.antialiasing;
 		if (stageUI != "normal")
 		{
-			uiFolder = uiPrefix + "UI/";
+			uiFolder = "HUD/pixel/";
 			antialias = !isPixelStage;
 		}
 
