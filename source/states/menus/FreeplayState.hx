@@ -348,9 +348,6 @@ class FreeplayState extends MusicBeatState
 			stopMusicPlay = true;
 
 			destroyFreeplayVocals();
-			#if (MODS_ALLOWED && DISCORD_ALLOWED)
-			DiscordClient.loadModRPC();
-			#end
 		}
 		else if(controls.RESET)
 		{
@@ -368,11 +365,7 @@ class FreeplayState extends MusicBeatState
 		try
 		{
 			var path:String = Paths.getPath('data/characters/$char.json', TEXT);
-			#if MODS_ALLOWED
-			var character:Dynamic = Json.parse(File.getContent(path));
-			#else
 			var character:Dynamic = Json.parse(Assets.getText(path));
-			#end
 			return character.vocals_file;
 		}
 		catch (e:Dynamic) {}

@@ -28,19 +28,10 @@ class HScript extends Iris
 	public var origin:String;
 	override public function new(?parent:Dynamic, ?file:String, ?varsToBring:Any = null, ?manualRun:Bool = false)
 	{
-		if (file == null)
-			file = '';
-
+		if (file == null) file = '';
 		filePath = file;
-		if (filePath != null && filePath.length > 0)
-		{
-			this.origin = filePath;
-			#if MODS_ALLOWED
-			var myFolder:Array<String> = filePath.split('/');
-			if(myFolder[0] + '/' == Paths.mods() && (Mods.currentModDirectory == myFolder[1] || Mods.getGlobalMods().contains(myFolder[1]))) //is inside mods folder
-				this.modFolder = myFolder[1];
-			#end
-		}
+		if (filePath != null && filePath.length > 0) this.origin = filePath;
+
 		var scriptThing:String = file;
 		var scriptName:String = null;
 		if(parent == null && file != null)

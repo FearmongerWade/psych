@@ -4857,28 +4857,6 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 					fileList.push(file);
 			}
 		}
-
-		#if MODS_ALLOWED
-		for (directory in Mods.directoriesWithFile(Paths.getSharedPath(), mainFolder))
-		{
-			for (file in FileSystem.readDirectory(directory))
-			{
-				var path = haxe.io.Path.join([directory, file.trim()]);
-				if (!FileSystem.isDirectory(path) && !file.startsWith('readme.'))
-				{
-					for (fileType in fileTypes)
-					{
-						var fileToCheck:String = file.substr(0, file.length - fileType.length);
-						if(fileToCheck.length > 0 && path.endsWith(fileType) && !fileList.contains(fileToCheck))
-						{
-							fileList.push(fileToCheck);
-							break;
-						}
-					}
-				}
-			}
-		}
-		#end
 		return fileList;
 	}
 	
@@ -4889,11 +4867,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			try
 			{
 				var path:String = Paths.getPath('data/characters/' + char + '.json', TEXT);
-				#if MODS_ALLOWED
-				var unparsedJson = File.getContent(path);
-				#else
 				var unparsedJson = Assets.getText(path);
-				#end
 				return cast Json.parse(unparsedJson);
 			}
 			catch (e:Dynamic) {}

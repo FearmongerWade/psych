@@ -383,13 +383,8 @@ class DialogueBoxPsych extends FlxSpriteGroup
 		}
 	}
 
-	inline public static function parseDialogue(path:String):DialogueFile {
-		#if MODS_ALLOWED
-		return cast (FileSystem.exists(path)) ? Json.parse(File.getContent(path)) : dummy();
-		#else
+	inline public static function parseDialogue(path:String):DialogueFile 
 		return cast (Assets.exists(path, TEXT)) ? Json.parse(Assets.getText(path)) : dummy();
-		#end
-	}
 
 	inline public static function dummy():DialogueFile
 	{

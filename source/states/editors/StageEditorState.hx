@@ -1129,11 +1129,7 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 		{
 			var characterPath:String = 'data/stages/$selected.json';
 			var path:String = Paths.getPath(characterPath, TEXT, null, true);
-			#if MODS_ALLOWED
-			if (FileSystem.exists(path))
-			#else
 			if (Assets.exists(path))
-			#end
 			{
 				stageJson = StageData.getStageFile(selected);
 				lastLoadedStage = selected;
@@ -1712,7 +1708,7 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 			if(fullPath.startsWith(exePath))
 			{
 				fullPath = fullPath.substr(exePath.length);
-				if((fullPath.startsWith('assets/') #if MODS_ALLOWED || fullPath.startsWith('mods/') #end) && fullPath.contains('/images/'))
+				if((fullPath.startsWith('assets/')) && fullPath.contains('/images/'))
 				{
 					loadSprite(fullPath.substring(fullPath.indexOf('/images/') + '/images/'.length, fullPath.lastIndexOf('.')));
 					//trace('Inside Psych Engine Folder');
@@ -1721,61 +1717,7 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 			}
 
 			createPopup.visible = createPopup.active = false;
-			#if MODS_ALLOWED
-			var modFolder:String = (Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0) ? Paths.mods('${Mods.currentModDirectory}/images/') : Paths.mods('images/');
-			openSubState(new BasePrompt(480, 160, 'This file is not inside Psych Engine.', function(state:BasePrompt)
-			{
-				var txt:FlxText = new FlxText(0, state.bg.y + 60, 460, 'Copy to: "$modFolder"?', 11);
-				txt.alignment = CENTER;
-				txt.screenCenter(X);
-				txt.cameras = state.cameras;
-				state.add(txt);
-				
-				var btnY = 390;
-				var btn:PsychUIButton = new PsychUIButton(0, btnY, 'OK', function() {
-					var fileName:String = fullPath.substring(fullPath.lastIndexOf('/') + 1, fullPath.lastIndexOf('.'));
-					var pathNoExt:String = fullPath.substring(0, fullPath.lastIndexOf('.'));
-					function saveFile(ext:String)
-					{
-						var p1:String = '$pathNoExt.$ext';
-						var p2:String = modFolder + '$fileName.$ext';
-						trace(p1, p2);
-						if(FileSystem.exists(p1))
-							File.saveBytes(p2, File.getBytes(p1));
-					}
-
-					FileSystem.createDirectory(modFolder);
-					saveFile('png');
-					saveFile('xml');
-					saveFile('txt');
-					saveFile('json');
-					loadSprite(fileName);
-					state.close();
-				});
-				btn.normalStyle.bgColor = FlxColor.GREEN;
-				btn.normalStyle.textColor = FlxColor.WHITE;
-				btn.screenCenter(X);
-				btn.x -= 100;
-				btn.cameras = state.cameras;
-				state.add(btn);
-
-				var btn:PsychUIButton = new PsychUIButton(0, btnY, 'Cancel', function()
-				{
-					_makeNewSprite = null;
-					state.close();
-				});
-				btn.screenCenter(X);
-				btn.x += 100;
-				btn.cameras = state.cameras;
-				state.add(btn);
-			}));
-			#else
-			showOutput('ERROR! File cannot be used, move it to "assets" and recompile.', true);
-			#end
 		}
-		_file = null;
-		#else
-		trace('File couldn\'t be loaded! You aren\'t on Desktop, are you?');
 		#end
 	}
 
