@@ -30,31 +30,12 @@ class Awards
 	public static function init()
 	{
 		createAward('friday_night_play',		{name: "Freaky on a Friday Night", description: "Play on a Friday... Night.", hidden: true});
-		#if BASE_GAME_FILES
-		createAward('week1_nomiss',			{name: "She Calls Me Daddy Too", description: "Beat Week 1 on Hard with no Misses."});
-		createAward('week2_nomiss',			{name: "No More Tricks", description: "Beat Week 2 on Hard with no Misses."});
-		createAward('week3_nomiss',			{name: "Call Me The Hitman", description: "Beat Week 3 on Hard with no Misses."});
-		createAward('week4_nomiss',			{name: "Lady Killer", description: "Beat Week 4 on Hard with no Misses."});
-		createAward('week5_nomiss',			{name: "Missless Christmas", description: "Beat Week 5 on Hard with no Misses."});
-		createAward('week6_nomiss',			{name: "Highscore!!", description: "Beat Week 6 on Hard with no Misses."});
-		createAward('week7_nomiss',			{name: "God Effing Damn It!", description: "Beat Week 7 on Hard with no Misses."});
-		createAward('weekend1_nomiss',		{name: "Just a Friendly Sparring", description: "Beat Weekend 1 on Hard with no Misses."});
-		#end
 		createAward('ur_bad',					{name: "What a Funkin' Disaster!", description: "Complete a Song with a rating lower than 20%."});
-		createAward('ur_good',				{name: "Perfectionist", description: "Complete a Song with a rating of 100%."});
-		#if BASE_GAME_FILES
-		createAward('roadkill_enthusiast',	{name: "Roadkill Enthusiast", description: "Watch the Henchmen die 50 times.", maxScore: 50, maxDecimals: 0});
-		#end
-		createAward('oversinging', 			{name: "Oversinging Much...?", description: "Sing for 10 seconds without going back to Idle."});
-		createAward('hype',					{name: "Hyperactive", description: "Finish a Song without going back to Idle."});
-		createAward('two_keys',				{name: "Just the Two of Us", description: "Finish a Song pressing only two keys."});
-		createAward('toastie',				{name: "Toaster Gamer", description: "Have you tried to run the game on a toaster?"});
-		#if BASE_GAME_FILES
-		createAward('debugger',				{name: "Debugger", description: "Beat the \"Test\" Stage from the Chart Editor.", hidden: true});
-		#end
-		#if (TITLE_SCREEN_EASTER_EGG || PSYCH_WATERMARKS)
-		createAward('pessy_easter_egg',		{name: "Engine Gal Pal", description: "Teehee, you found me~!", hidden: true});
-		#end
+		createAward('ur_good',					{name: "Perfectionist", description: "Complete a Song with a rating of 100%."});
+		createAward('oversinging', 				{name: "Oversinging Much...?", description: "Sing for 10 seconds without going back to Idle."});
+		createAward('hype',						{name: "Hyperactive", description: "Finish a Song without going back to Idle."});
+		createAward('two_keys',					{name: "Just the Two of Us", description: "Finish a Song pressing only two keys."});
+		createAward('toastie',					{name: "Toaster Gamer", description: "Have you tried to run the game on a toaster?"});
 
 		//dont delete this thing below
 		_originalLength = _sortID + 1;

@@ -3,7 +3,7 @@ package states.editors;
 import backend.StageData;
 import backend.PsychCamera;
 import objects.Character;
-import hscript.HScriptUtil;
+import hscript.ScriptUtil;
 
 import flixel.FlxObject;
 import flixel.addons.display.FlxBackdrop;

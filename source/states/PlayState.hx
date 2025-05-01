@@ -40,15 +40,7 @@ import objects.Note.EventNote;
 import objects.*;
 import stages.*;
 import stages.objects.*;
-
 import hscript.*;
-
-#if HSCRIPT_ALLOWED
-import hscript.HScript.HScriptInfos;
-import crowplexus.iris.Iris;
-import crowplexus.hscript.Expr.Error as IrisError;
-import crowplexus.hscript.Printer;
-#end
 
 /**
  * This is where all the Gameplay stuff happens and is managed
@@ -90,10 +82,6 @@ class PlayState extends MusicBeatState
 	public var boyfriendMap:Map<String, Character> = new Map<String, Character>();
 	public var dadMap:Map<String, Character> = new Map<String, Character>();
 	public var gfMap:Map<String, Character> = new Map<String, Character>();
-
-	#if HSCRIPT_ALLOWED
-	public var hscriptArray:Array<HScript> = [];
-	#end
 
 	public var BF_X:Float = 770;
 	public var BF_Y:Float = 100;
@@ -245,9 +233,6 @@ class PlayState extends MusicBeatState
 	// Lua shit
 	public static var instance:PlayState;
 
-	#if (HSCRIPT_ALLOWED)
-	private var luaDebugGroup:FlxTypedGroup<hscript.DebugText>;
-	#end
 	public var introSoundsSuffix:String = '';
 
 	// Less laggy controls
@@ -375,12 +360,6 @@ class PlayState extends MusicBeatState
 		}
 		if(isPixelStage) introSoundsSuffix = '-pixel';
 
-		#if HSCRIPT_ALLOWED
-		luaDebugGroup = new FlxTypedGroup<hscript.DebugText>();
-		luaDebugGroup.cameras = [camOther];
-		add(luaDebugGroup);
-		#end
-
 		if (!stageData.hide_girlfriend)
 		{
 			if(SONG.gfVersion == null || SONG.gfVersion.length < 1) SONG.gfVersion = 'gf'; //Fix for the Chart Editor
@@ -411,16 +390,6 @@ class PlayState extends MusicBeatState
 			add(dadGroup);
 			add(boyfriendGroup);
 		}
-		
-		#if HSCRIPT_ALLOWED
-		// "SCRIPTS FOLDER" SCRIPTS
-		for (folder in Mods.directoriesWithFile(Paths.getSharedPath(), 'scripts/'))
-			for (file in FileSystem.readDirectory(folder))
-			{
-				if(file.toLowerCase().endsWith('.hx'))
-					initHScript(folder + file);
-			}
-		#end
 			
 		var camPos:FlxPoint = FlxPoint.get(girlfriendCameraOffset[0], girlfriendCameraOffset[1]);
 		if(gf != null)
@@ -434,16 +403,6 @@ class PlayState extends MusicBeatState
 			if(gf != null)
 				gf.visible = false;
 		}
-		
-		#if HSCRIPT_ALLOWED
-		// STAGE SCRIPTS
-		startHScriptsNamed('data/stages/' + curStage + '.hx');
-
-		// CHARACTER SCRIPTS
-		if(gf != null) startCharacterScripts(gf.curCharacter);
-		startCharacterScripts(dad.curCharacter);
-		startCharacterScripts(boyfriend.curCharacter);
-		#end
 
 		uiGroup = new FlxSpriteGroup();
 		comboGroup = new FlxSpriteGroup();
@@ -544,25 +503,8 @@ class PlayState extends MusicBeatState
 
 		startingSong = true;
 
-
-		#if HSCRIPT_ALLOWED
-		for (notetype in noteTypes)
-			startHScriptsNamed('custom_notetypes/' + notetype + '.hx');
-		for (event in eventsPushed)
-			startHScriptsNamed('custom_events/' + event + '.hx');
-		#end
 		noteTypes = null;
 		eventsPushed = null;
-
-		// SONG SPECIFIC SCRIPTS
-		#if HSCRIPT_ALLOWED
-		for (folder in Mods.directoriesWithFile(Paths.getSharedPath(), 'songs/$songName/'))
-			for (file in FileSystem.readDirectory(folder))
-			{
-				if(file.toLowerCase().endsWith('.hx'))
-					initHScript(folder + file);
-			}
-		#end
 
 		if(eventNotes.length > 0)
 		{
@@ -650,24 +592,6 @@ class PlayState extends MusicBeatState
 		return playbackRate;
 	}
 
-	#if HSCRIPT_ALLOWED
-	public function addTextToDebug(text:String, color:FlxColor) {
-		var newText:hscript.DebugText = luaDebugGroup.recycle(hscript.DebugText);
-		newText.text = text;
-		newText.color = color;
-		newText.disableTime = 6;
-		newText.alpha = 1;
-		newText.setPosition(10, 8 - newText.height);
-
-		luaDebugGroup.forEachAlive(function(spr:hscript.DebugText) {
-			spr.y += newText.height + 2;
-		});
-		luaDebugGroup.add(newText);
-
-		Sys.println(text);
-	}
-	#end
-
 	public function reloadHealthBarColors() {
 		healthBar.setColors(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]),
 			FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]));
@@ -682,7 +606,6 @@ class PlayState extends MusicBeatState
 					boyfriendGroup.add(newBoyfriend);
 					startCharacterPos(newBoyfriend);
 					newBoyfriend.alpha = 0.00001;
-					startCharacterScripts(newBoyfriend.curCharacter);
 				}
 
 			case 1:
@@ -692,7 +615,6 @@ class PlayState extends MusicBeatState
 					dadGroup.add(newDad);
 					startCharacterPos(newDad, true);
 					newDad.alpha = 0.00001;
-					startCharacterScripts(newDad.curCharacter);
 				}
 
 			case 2:
@@ -703,29 +625,8 @@ class PlayState extends MusicBeatState
 					gfGroup.add(newGf);
 					startCharacterPos(newGf);
 					newGf.alpha = 0.00001;
-					startCharacterScripts(newGf.curCharacter);
 				}
 		}
-	}
-
-	function startCharacterScripts(name:String)
-	{
-		// HScript
-		#if HSCRIPT_ALLOWED
-		var doPush:Bool = false;
-		var scriptFile:String = 'data/characters/' + name + '.hx';
-		scriptFile = Paths.getSharedPath(scriptFile);
-		if(FileSystem.exists(scriptFile))
-			doPush = true;
-
-		if(doPush)
-		{
-			if(Iris.instances.exists(scriptFile))
-				doPush = false;
-
-			if(doPush) initHScript(scriptFile);
-		}
-		#end
 	}
 
 	function startCharacterPos(char:Character, ?gfCheck:Bool = false) 
@@ -786,11 +687,7 @@ class PlayState extends MusicBeatState
 				videoCutscene.play();
 			return videoCutscene;
 		}
-		#if HSCRIPT_ALLOWED
-		else addTextToDebug("Video not found: " + fileName, FlxColor.RED);
-		#else
 		else FlxG.log.error("Video not found: " + fileName);
-		#end
 		#else
 		FlxG.log.warn('Platform not supported!');
 		startAndEnd();
@@ -876,7 +773,7 @@ class PlayState extends MusicBeatState
 		seenCutscene = true;
 		inCutscene = false;
 		var ret:Dynamic = callOnScripts('onStartCountdown', null, true);
-		if(ret != HScriptUtil.Function_Stop) {
+		if(ret != ScriptUtil.Function_Stop) {
 			if (skipCountdown || startOnTime > 0) skipArrowStartTween = true;
 
 			canPause = true;
@@ -1045,7 +942,7 @@ class PlayState extends MusicBeatState
 	public dynamic function updateScore(miss:Bool = false, scoreBop:Bool = true)
 	{
 		var ret:Dynamic = callOnScripts('preUpdateScore', [miss], true);
-		if (ret == HScriptUtil.Function_Stop)
+		if (ret == ScriptUtil.Function_Stop)
 			return;
 
 		updateScoreText();
@@ -1610,7 +1507,7 @@ class PlayState extends MusicBeatState
 		if (controls.PAUSE && startedCountdown && canPause)
 		{
 			var ret:Dynamic = callOnScripts('onPause', null, true);
-			if(ret != HScriptUtil.Function_Stop) {
+			if(ret != ScriptUtil.Function_Stop) {
 				openPauseMenu();
 			}
 		}
@@ -1892,7 +1789,7 @@ class PlayState extends MusicBeatState
 		if (((skipHealthCheck && instakillOnMiss) || health <= 0) && !practiceMode && !isDead && gameOverTimer == null)
 		{
 			var ret:Dynamic = callOnScripts('onGameOver', null, true);
-			if(ret != HScriptUtil.Function_Stop)
+			if(ret != ScriptUtil.Function_Stop)
 			{
 				FlxG.animationTimeScale = 1;
 				boyfriend.stunned = true;
@@ -2188,20 +2085,16 @@ class PlayState extends MusicBeatState
 
 					var split:Array<String> = value1.split('.');
 					if(split.length > 1) {
-						HScriptUtil.setVarInArray(HScriptUtil.getPropertyLoop(split), split[split.length-1], trueValue);
+						ScriptUtil.setVarInArray(ScriptUtil.getPropertyLoop(split), split[split.length-1], trueValue);
 					} else {
-						HScriptUtil.setVarInArray(this, value1, trueValue);
+						ScriptUtil.setVarInArray(this, value1, trueValue);
 					}
 				}
 				catch(e:Dynamic)
 				{
 					var len:Int = e.message.indexOf('\n') + 1;
 					if(len <= 0) len = e.message.length;
-					#if HSCRIPT_ALLOWED
-					addTextToDebug('ERROR ("Set Property" Event) - ' + e.message.substr(0, len), FlxColor.RED);
-					#else
 					FlxG.log.warn('ERROR ("Set Property" Event) - ' + e.message.substr(0, len));
-					#end
 				}
 
 			case 'Play Sound':
@@ -2337,11 +2230,11 @@ class PlayState extends MusicBeatState
 
 		#if AWARDS_ALLOWED
 		var weekNoMiss:String = WeekData.getWeekFileName() + '_nomiss';
-		checkForAward([weekNoMiss, 'ur_bad', 'ur_good', 'hype', 'two_keys', 'toastie' #if BASE_GAME_FILES, 'debugger' #end]);
+		checkForAward([weekNoMiss, 'ur_bad', 'ur_good', 'hype', 'two_keys', 'toastie']);
 		#end
 
 		var ret:Dynamic = callOnScripts('onEndSong', null, true);
-		if(ret != HScriptUtil.Function_Stop && !transitioning)
+		if(ret != ScriptUtil.Function_Stop && !transitioning)
 		{
 			#if !switch
 			var percent:Float = ratingPercent;
@@ -2590,7 +2483,7 @@ class PlayState extends MusicBeatState
 		if(cpuControlled || paused || inCutscene || key < 0 || key >= playerStrums.length || !generatedMusic || endingSong || boyfriend.stunned) return;
 
 		var ret:Dynamic = callOnScripts('onKeyPressPre', [key]);
-		if(ret == HScriptUtil.Function_Stop) return;
+		if(ret == ScriptUtil.Function_Stop) return;
 
 		// more accurate hit time for the ratings?
 		var lastTime:Float = Conductor.songPosition;
@@ -2668,7 +2561,7 @@ class PlayState extends MusicBeatState
 		if(cpuControlled || !startedCountdown || paused || key < 0 || key >= playerStrums.length) return;
 
 		var ret:Dynamic = callOnScripts('onKeyReleasePre', [key]);
-		if(ret == HScriptUtil.Function_Stop) return;
+		if(ret == ScriptUtil.Function_Stop) return;
 
 		var spr:StrumNote = playerStrums.members[key];
 		if(spr != null)
@@ -2855,7 +2748,7 @@ class PlayState extends MusicBeatState
 	{
 		var result:Dynamic = callOnHScript('opponentNoteHitPre', [note]);
 
-		if(result == HScriptUtil.Function_Stop) return;
+		if(result == ScriptUtil.Function_Stop) return;
 
 		if (songName != 'tutorial')
 			camZooming = true;
@@ -2908,7 +2801,7 @@ class PlayState extends MusicBeatState
 
 		var result:Dynamic = callOnHScript('goodNoteHitPre', [note]);
 
-		if(result == HScriptUtil.Function_Stop) return;
+		if(result == ScriptUtil.Function_Stop) return;
 
 		note.wasGoodHit = true;
 
@@ -3018,23 +2911,8 @@ class PlayState extends MusicBeatState
 		grpNoteSplashes.add(splash);
 	}
 
-	override function destroy() {
-		if (hscript.CustomSubstate.instance != null)
-		{
-			closeSubState();
-			resetSubState();
-		}
-
-		#if HSCRIPT_ALLOWED
-		for (script in hscriptArray)
-			if(script != null)
-			{
-				if(script.exists('onDestroy')) script.call('onDestroy');
-				script.destroy();
-			}
-
-		hscriptArray = null;
-		#end
+	override function destroy() 
+	{
 		stagesFunc(function(stage:BaseStage) stage.destroy());
 
 		#if VIDEOS_ALLOWED
@@ -3149,86 +3027,18 @@ class PlayState extends MusicBeatState
 		callOnScripts('onSectionHit');
 	}
 
-	#if HSCRIPT_ALLOWED
-	public function startHScriptsNamed(scriptFile:String)
-	{
-		var scriptToLoad:String = Paths.getSharedPath(scriptFile);
-
-		if(FileSystem.exists(scriptToLoad))
-		{
-			if (Iris.instances.exists(scriptToLoad)) return false;
-
-			initHScript(scriptToLoad);
-			return true;
-		}
-		return false;
-	}
-
-	public function initHScript(file:String)
-	{
-		var newScript:HScript = null;
-		try
-		{
-			newScript = new HScript(null, file);
-			if (newScript.exists('onCreate')) newScript.call('onCreate');
-			trace('initialized hscript interp successfully: $file');
-			hscriptArray.push(newScript);
-		}
-		catch(e:IrisError)
-		{
-			var pos:HScriptInfos = cast {fileName: file, showLine: false};
-			Iris.error(Printer.errorToString(e, false), pos);
-			var newScript:HScript = cast (Iris.instances.get(file), HScript);
-			if(newScript != null)
-				newScript.destroy();
-		}
-	}
-	#end
-
 	public function callOnScripts(funcToCall:String, args:Array<Dynamic> = null, ignoreStops = false, exclusions:Array<String> = null, excludeValues:Array<Dynamic> = null):Dynamic {
-		var returnVal:Dynamic = HScriptUtil.Function_Continue;
+		var returnVal:Dynamic = ScriptUtil.Function_Continue;
 		if(args == null) args = [];
 		if(exclusions == null) exclusions = [];
-		if(excludeValues == null) excludeValues = [HScriptUtil.Function_Continue];
+		if(excludeValues == null) excludeValues = [ScriptUtil.Function_Continue];
 
 		var result:Dynamic = callOnHScript(funcToCall, args, ignoreStops, exclusions, excludeValues);
 		return result;
 	}
 
 	public function callOnHScript(funcToCall:String, args:Array<Dynamic> = null, ?ignoreStops:Bool = false, exclusions:Array<String> = null, excludeValues:Array<Dynamic> = null):Dynamic {
-		var returnVal:Dynamic = HScriptUtil.Function_Continue;
-
-		#if HSCRIPT_ALLOWED
-		if(exclusions == null) exclusions = new Array();
-		if(excludeValues == null) excludeValues = new Array();
-		excludeValues.push(HScriptUtil.Function_Continue);
-
-		var len:Int = hscriptArray.length;
-		if (len < 1)
-			return returnVal;
-
-		for(script in hscriptArray)
-		{
-			@:privateAccess
-			if(script == null || !script.exists(funcToCall) || exclusions.contains(script.origin))
-				continue;
-
-			var callValue = script.call(funcToCall, args);
-			if(callValue != null)
-			{
-				var myValue:Dynamic = callValue.returnValue;
-
-				if((myValue == HScriptUtil.Function_StopHScript || myValue == HScriptUtil.Function_StopAll) && !excludeValues.contains(myValue) && !ignoreStops)
-				{
-					returnVal = myValue;
-					break;
-				}
-
-				if(myValue != null && !excludeValues.contains(myValue))
-					returnVal = myValue;
-			}
-		}
-		#end
+		var returnVal:Dynamic = ScriptUtil.Function_Continue;
 
 		return returnVal;
 	}
@@ -3239,15 +3049,6 @@ class PlayState extends MusicBeatState
 	}
 
 	public function setOnHScript(variable:String, arg:Dynamic, exclusions:Array<String> = null) {
-		#if HSCRIPT_ALLOWED
-		if(exclusions == null) exclusions = [];
-		for (script in hscriptArray) {
-			if(exclusions.contains(script.origin))
-				continue;
-
-			script.set(variable, arg);
-		}
-		#end
 	}
 
 	function strumPlayAnim(isDad:Bool, id:Int, time:Float) {
@@ -3274,7 +3075,7 @@ class PlayState extends MusicBeatState
 		setOnScripts('combo', combo);
 
 		var ret:Dynamic = callOnScripts('onRecalculateRating', null, true);
-		if(ret != HScriptUtil.Function_Stop)
+		if(ret != ScriptUtil.Function_Stop)
 		{
 			ratingName = '?';
 			if(totalPlayed != 0) //Prevent divide by 0
@@ -3336,11 +3137,6 @@ class PlayState extends MusicBeatState
 
 					case 'toastie':
 						unlock = (!Settings.data.cacheOnGPU && !Settings.data.shaders && Settings.data.lowQuality && !Settings.data.antialiasing);
-
-					#if BASE_GAME_FILES
-					case 'debugger':
-						unlock = (songName == 'test' && !usedPractice);
-					#end
 				}
 			}
 			else // any FC achievements, name should be "weekFileName_nomiss", e.g: "week3_nomiss";
@@ -3413,11 +3209,7 @@ class PlayState extends MusicBeatState
 				return true;
 			}
 		}
-			#if HSCRIPT_ALLOWED
-			addTextToDebug('Missing shader $name .frag AND .vert files!', FlxColor.RED);
-			#else
-			FlxG.log.warn('Missing shader $name .frag AND .vert files!');
-			#end
+		FlxG.log.warn('Missing shader $name .frag AND .vert files!');
 		#else
 		FlxG.log.warn('This platform doesn\'t support Runtime Shaders!');
 		#end

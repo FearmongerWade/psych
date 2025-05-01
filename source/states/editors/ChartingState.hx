@@ -3064,7 +3064,6 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		if(noteTypeDropDown != null)
 		{
 			var exts:Array<String> = ['.txt'];
-			#if HSCRIPT_ALLOWED exts.push('.hx'); #end
 			noteTypes = loadFileList('custom_notetypes/', exts);
 			for (id => noteType in Note.defaultNoteTypes)
 				if(!noteTypes.contains(noteType))

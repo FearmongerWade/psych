@@ -1,4 +1,4 @@
-package hscript;
+package scripting;
 
 import backend.WeekData;
 import objects.Character;
@@ -9,7 +9,7 @@ import Type.ValueType;
 
 import substates.GameOverSubstate;
 
-class HScriptUtil
+class ScriptUtil
 {
 	public static final Function_Stop:String = "##PSYCHLUA_FUNCTIONSTOP";
 	public static final Function_Continue:String = "##PSYCHLUA_FUNCTIONCONTINUE";
