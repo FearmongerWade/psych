@@ -1,6 +1,6 @@
 package objects;
 
-import backend.animation.PsychAnimationController;
+import flxanimate.PsychAnimationController;
 import backend.NoteTypesConfig;
 
 import shaders.RGBPalette;

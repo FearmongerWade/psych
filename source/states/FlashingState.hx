@@ -1,4 +1,4 @@
-package states.menus;
+package states;
 
 import flixel.FlxSubState;
 import flixel.effects.FlxFlicker;

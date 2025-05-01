@@ -1,4 +1,4 @@
-package states.menus;
+package states;
 
 import flixel.graphics.frames.FlxFrame;
 import flixel.group.FlxGroup;

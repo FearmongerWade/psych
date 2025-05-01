@@ -21,8 +21,8 @@ import haxe.Json;
 
 import cutscenes.DialogueBoxPsych;
 
-import states.menus.StoryMenuState;
-import states.menus.FreeplayState;
+import states.StoryMenuState;
+import states.FreeplayState;
 import states.editors.ChartingState;
 import states.editors.CharacterEditorState;
 
@@ -750,7 +750,7 @@ class PlayState extends MusicBeatState
 		var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
 		var introImagesArray:Array<String> = switch(stageUI) {
 			case "pixel": ['pixel/ready-pixel', 'pixel/set-pixel', 'pixel/date-pixel'];
-			case "normal": ["ready", "set" ,"go"];
+			case "normal": ["HUD/ready", "HUD/set" ,"HUD/go"];
 			default: ['${uiPrefix}/ready${uiPostfix}', '${uiPrefix}/set${uiPostfix}', '${uiPrefix}/go${uiPostfix}'];
 		}
 		introAssets.set(stageUI, introImagesArray);
@@ -814,7 +814,7 @@ class PlayState extends MusicBeatState
 				var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
 				var introImagesArray:Array<String> = switch(stageUI) {
 					case "pixel": ['pixel/ready-pixel', 'pixel/set-pixel', 'pixel/date-pixel'];
-					case "normal": ["ready", "set" ,"go"];
+					case "normal": ["HUD/ready", "HUD/set" ,"HUD/go"];
 					default: ['${uiPrefix}UI/ready${uiPostfix}', '${uiPrefix}UI/set${uiPostfix}', '${uiPrefix}UI/go${uiPostfix}'];
 				}
 				introAssets.set(stageUI, introImagesArray);

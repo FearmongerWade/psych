@@ -6,8 +6,8 @@ import backend.Song;
 
 import flixel.util.FlxStringUtil;
 
-import states.menus.StoryMenuState;
-import states.menus.FreeplayState;
+import states.StoryMenuState;
+import states.FreeplayState;
 import options.OptionsState;
 
 class PauseSubState extends MusicBeatSubstate

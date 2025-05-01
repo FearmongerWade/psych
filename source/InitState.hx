@@ -28,7 +28,7 @@ class InitState extends flixel.FlxState
         #end
 
         if (FlxG.save.data.weekCompleted != null)
-			states.menus.StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
+			states.StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
 
 		if(FlxG.save.data != null && FlxG.save.data.fullscreen)
 			FlxG.fullscreen = FlxG.save.data.fullscreen;

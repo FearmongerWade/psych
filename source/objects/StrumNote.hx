@@ -1,6 +1,6 @@
 package objects;
 
-import backend.animation.PsychAnimationController;
+import flxanimate.PsychAnimationController;
 
 import shaders.RGBPalette;
 import shaders.RGBPalette.RGBShaderReference;

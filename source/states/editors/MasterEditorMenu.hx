@@ -4,8 +4,8 @@ import backend.WeekData;
 
 import objects.Character;
 
-import states.menus.MainMenuState;
-import states.menus.FreeplayState;
+import states.MainMenuState;
+import states.FreeplayState;
 
 class MasterEditorMenu extends MusicBeatState
 {
