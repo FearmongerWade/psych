@@ -89,11 +89,6 @@ class NotesColorSubState extends MusicBeatSubstate
 		var bg:FlxSprite = new FlxSprite(750, 160).makeGraphic(FlxG.width - 780, 540, FlxColor.BLACK);
 		bg.alpha = 0.25;
 		add(bg);
-		
-		var text:Alphabet = new Alphabet(50, 86, 'CTRL', false);
-		text.alignment = CENTERED;
-		text.setScale(0.4);
-		add(text);
 
 		copyButton = new FlxSprite(760, 50).loadGraphic(Paths.image('menus/options/noteColorMenu/copy'));
 		copyButton.alpha = 0.6;
@@ -242,14 +237,6 @@ class NotesColorSubState extends MusicBeatSubstate
 		}
 		var controllerPressed:Bool = (controls.controllerMode && controls.ACCEPT);
 		//
-
-		if(FlxG.keys.justPressed.CONTROL)
-		{
-			onPixel = !onPixel;
-			spawnNotes();
-			updateNotes(true);
-			FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
-		}
 
 		if(hexTypeNum > -1)
 		{
@@ -605,7 +592,7 @@ class NotesColorSubState extends MusicBeatSubstate
 
 		// respawn stuff
 		var res:Int = onPixel ? 160 : 17;
-		skinNote = new FlxSprite(48, 24).loadGraphic(Paths.image('menus/options/noteColorMenu/' + (onPixel ? 'note' : 'notePixel')), true, res, res);
+		skinNote = new FlxSprite(48, 24).loadGraphic(Paths.image('menus/options/noteColorMenu/note'), true, res, res);
 		skinNote.antialiasing = Settings.data.antialiasing;
 		skinNote.setGraphicSize(68);
 		skinNote.updateHitbox();
@@ -617,7 +604,7 @@ class NotesColorSubState extends MusicBeatSubstate
 		var res:Int = !onPixel ? 160 : 17;
 		for (i in 0...3)
 		{
-			var newNote:FlxSprite = new FlxSprite(230 + (100 * i), 100).loadGraphic(Paths.image('menus/options/noteColorMenu/' + (!onPixel ? 'note' : 'notePixel')), true, res, res);
+			var newNote:FlxSprite = new FlxSprite(230 + (100 * i), 100).loadGraphic(Paths.image('menus/options/noteColorMenu/note'), true, res, res);
 			newNote.antialiasing = Settings.data.antialiasing;
 			newNote.setGraphicSize(85);
 			newNote.updateHitbox();
