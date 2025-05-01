@@ -532,10 +532,10 @@ class LoadingState extends MusicBeatState
 						{
 							if(asset.startsWith('images/'))
 								imgs.push(asset.substr('images/'.length));
-							else if(asset.startsWith('audio/sounds/'))
-								snds.push(asset.substr('audio/sounds/'.length));
-							else if(asset.startsWith('audio/music/'))
-								mscs.push(asset.substr('audio/music/'.length));
+							else if(asset.startsWith('sounds/'))
+								snds.push(asset.substr('sounds/'.length));
+							else if(asset.startsWith('music/'))
+								mscs.push(asset.substr('music/'.length));
 						}
 					}
 				}
@@ -606,8 +606,8 @@ class LoadingState extends MusicBeatState
 	public static function clearInvalids()
 	{
 		clearInvalidFrom(imagesToPrepare, 'images', '.png', IMAGE);
-		clearInvalidFrom(soundsToPrepare, 'audio/sounds', '.${Paths.SOUND_EXT}', SOUND);
-		clearInvalidFrom(musicToPrepare, 'audio/music',' .${Paths.SOUND_EXT}', SOUND);
+		clearInvalidFrom(soundsToPrepare, 'sounds', '.${Paths.SOUND_EXT}', SOUND);
+		clearInvalidFrom(musicToPrepare, 'music',' .${Paths.SOUND_EXT}', SOUND);
 		clearInvalidFrom(songsToPrepare, 'songs', '.${Paths.SOUND_EXT}', SOUND, 'songs');
 
 		for (arr in [imagesToPrepare, soundsToPrepare, musicToPrepare, songsToPrepare])
