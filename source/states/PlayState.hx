@@ -1307,10 +1307,6 @@ class PlayState extends MusicBeatState
 			return returnedValue;
 		}
 
-		switch(event.event) {
-			case 'Kill Henchmen': //Better timing so that the kill sound matches the beat intended
-				return 280; //Plays 280ms before the actual position
-		}
 		return 0;
 	}
 
