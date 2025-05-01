@@ -1,4 +1,4 @@
-package hscript;
+package scripting;
 
 #if flxanimate
 class ModchartAnimateSprite extends FlxAnimate

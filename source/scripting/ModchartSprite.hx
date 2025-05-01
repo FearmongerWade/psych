@@ -1,4 +1,4 @@
-package hscript;
+package scripting;
 
 class ModchartSprite extends FlxSprite
 {

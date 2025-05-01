@@ -40,7 +40,7 @@ import objects.Note.EventNote;
 import objects.*;
 import stages.*;
 import stages.objects.*;
-import hscript.*;
+import scripting.*;
 
 /**
  * This is where all the Gameplay stuff happens and is managed
